@@ -56,42 +56,7 @@ public class Generator1D : MonoBehaviour
     }
 
     public void GenerateRoads() {
-    Vector2Int currentPosition = startPosition;
-    Vector2 currentDirection = direction;
-    int straightLength = 0;
-
-    // Loop for the total length of the level
-    for (int i = 0; i < levelDistance; i++) {
-        // If the node is not null, it's already occupied. So, skip to the next iteration
-        if (nodes[currentPosition.x, currentPosition.y] != null) {
-            continue;
-        }
-
-        // If the straight length is larger than max or randomly decides to turn based on the average straight length
-        if (straightLength >= maxStraight || Random.Range(0, averageStraight) == 0) {
-            // Change direction by choosing a random direction biased towards the initial direction
-            float angle = Mathf.Atan2(direction.y, direction.x) + Random.Range(-45f, 45f) * Mathf.Deg2Rad;
-            currentDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-
-            straightLength = 0;
-        }
-
-        Node roadNode = new Node(currentPosition, "Road");
-        nodes[currentPosition.x, currentPosition.y] = roadNode;
-        straightLength++;
-
-        // Choose the next position based on the current direction
-        // We round to the nearest integer to ensure we stay on the grid
-        currentPosition += RoundToNearestVector2Int(currentDirection);
     }
-}
-
-// This function takes a Vector2 and rounds its components to the nearest integers,
-// resulting in a Vector2Int
-Vector2Int RoundToNearestVector2Int(Vector2 v) {
-    return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y));
-}
-
 
     void DisplayCity()
     {
