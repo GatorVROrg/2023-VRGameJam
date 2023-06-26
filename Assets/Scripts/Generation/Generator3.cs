@@ -18,7 +18,6 @@ public class Generator3 : MonoBehaviour
     private List<Node> roads;
     private string currentRoadType;
     private int currentNodeIndex;
-    private List<Node> currentRoads;
 
 
     // Start is called before the first frame update
@@ -32,8 +31,6 @@ public class Generator3 : MonoBehaviour
 
         GenerateRoads();
         InstantiateRoads();
-
-        currentRoads = roads.GetRange(0, lookAhead * 2);
     }
 
     void Update()
@@ -47,8 +44,23 @@ public class Generator3 : MonoBehaviour
     public void GenerateRoads() 
     {
         int currentStraight = 0;
+        List<Node> prependedRoads = new List<Node>(); // List of roads to be added at the beginning
+
+        // Generate prepended roads
+        Vector2Int prependPosition = startPosition - (direction * lookAhead); // Adjust the start position
+        for (int i = 0; i < lookAhead; i++)
+        {
+            Node prependNode = new Node(prependPosition, currentRoadType);
+            prependNode.road = Instantiate(roadPrefab, new Vector3(prependPosition.x, .5f, prependPosition.y), Quaternion.identity);
+            prependNode.road.SetActive(false);
+            prependedRoads.Add(prependNode);
+            prependPosition += direction; // Move position one step in the same direction
+        }
+
+        // Generate normal roads
+        prependPosition = startPosition;
         Node startNode = new Node(startPosition, currentRoadType);
-        startNode.road = Instantiate(roadPrefab, new Vector3(startPosition.x, .5f, startPosition.y), Quaternion.identity);;
+        startNode.road = Instantiate(roadPrefab, new Vector3(startPosition.x, .5f, startPosition.y), Quaternion.identity);
         startNode.road.SetActive(false);
         roads.Add(startNode);
 
@@ -67,7 +79,14 @@ public class Generator3 : MonoBehaviour
             nextNode.road.SetActive(false);
             roads.Add(nextNode);
         }
+
+        // Add the prepended roads at the beginning of the roads list
+        roads.InsertRange(0, prependedRoads);
+        currentNodeIndex += prependedRoads.Count; // Update the current node index
     }
+
+
+
 
     public void ChangeDirection() 
     {
@@ -115,8 +134,6 @@ public class Generator3 : MonoBehaviour
             // Check if the player has moved forward or backward
             if (roads[currentNodeIndex + 1].position == playerRoadPosition)
             {
-                // The player has moved forward
-                currentNodeIndex++;
 
                 // Deactivate the road at the back of the range
                 DespawnRoad(roads[currentNodeIndex - lookAhead]);
@@ -126,11 +143,11 @@ public class Generator3 : MonoBehaviour
                 {
                     SpawnRoad(roads[currentNodeIndex + lookAhead]);
                 }
+
+                currentNodeIndex++;
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
-                // The player has moved backward
-                currentNodeIndex--;
 
                 // Deactivate the road at the front of the range
                 if (currentNodeIndex + lookAhead - 1 < roads.Count)
@@ -140,6 +157,8 @@ public class Generator3 : MonoBehaviour
 
                 // Activate the road at the back of the range
                 SpawnRoad(roads[currentNodeIndex - lookAhead]);
+
+                currentNodeIndex--;
             }
         }
     }
