@@ -56,14 +56,14 @@ namespace UnityEngine.XR.Content.Interaction
                 m_AccumulatedAngle += m_CurrentOffset;
 
                 // Now set a new base angle
-                m_BaseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                m_BaseAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
                 m_CurrentOffset = 0.0f;
             }
 
             public void SetTargetFromVector(Vector3 direction)
             {
                 // Set the target angle
-                var targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                var targetAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
 
                 // Return the offset
                 m_CurrentOffset = ShortestAngleDistance(m_BaseAngle, targetAngle, 360.0f);
