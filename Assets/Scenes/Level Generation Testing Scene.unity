@@ -468,14 +468,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roadPrefab: {fileID: 4537870410947536726, guid: 7b1a5825c15fa804aac17d0b13929295,
     type: 3}
-  player: {fileID: 0}
+  player: {fileID: 1767915646}
   startPosition: {x: 0, y: 0}
   levelDistance: 1000
   maxStraight: 300
   averageStraight: 90
+  buildingPrefabs: []
+  lookAhead: 45
 --- !u!1 &1767915644 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5456486559593144868, guid: de9d99465f8769b4fab1753c71c479ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 308228881157894911}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1767915646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4715901996419785777, guid: de9d99465f8769b4fab1753c71c479ef,
     type: 3}
   m_PrefabInstance: {fileID: 308228881157894911}
   m_PrefabAsset: {fileID: 0}
@@ -662,7 +670,7 @@ PrefabInstance:
     - target: {fileID: 5456486559593144868, guid: de9d99465f8769b4fab1753c71c479ef,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
