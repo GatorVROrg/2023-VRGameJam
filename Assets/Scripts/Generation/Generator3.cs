@@ -134,8 +134,6 @@ public class Generator3 : MonoBehaviour
             // Check if the player has moved forward or backward
             if (roads[currentNodeIndex + 1].position == playerRoadPosition)
             {
-                // The player has moved forward
-                currentNodeIndex++;
 
                 // Deactivate the road at the back of the range
                 DespawnRoad(roads[currentNodeIndex - lookAhead]);
@@ -145,11 +143,11 @@ public class Generator3 : MonoBehaviour
                 {
                     SpawnRoad(roads[currentNodeIndex + lookAhead]);
                 }
+
+                currentNodeIndex++;
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
-                // The player has moved backward
-                currentNodeIndex--;
 
                 // Deactivate the road at the front of the range
                 if (currentNodeIndex + lookAhead - 1 < roads.Count)
@@ -159,6 +157,8 @@ public class Generator3 : MonoBehaviour
 
                 // Activate the road at the back of the range
                 SpawnRoad(roads[currentNodeIndex - lookAhead]);
+
+                currentNodeIndex--;
             }
         }
     }
