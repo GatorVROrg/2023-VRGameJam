@@ -4,7 +4,9 @@ public class Node
 {
     public Vector2Int position;  // The position of the node
     public string type;  // The type of the node ("Empty", "Structure")
-    public GameObject obj;
+    public GameObject road;
+    public GameObject leftBuilding;
+    public GameObject rightBuilding;
 
     public Node(Vector2Int _position, string _type)
     {
@@ -12,10 +14,10 @@ public class Node
         type = _type;
     }
     
-    public Node(Vector2Int _position, string _type, GameObject _prefab)
+    public Node(Vector2Int _position, string _type, GameObject _roadPrefab)
     {
         position = _position;
         type = _type;
-        obj = _prefab;
+        road = _roadPrefab;
     }
 }

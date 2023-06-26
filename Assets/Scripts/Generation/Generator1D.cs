@@ -9,6 +9,7 @@ public class Generator1D : MonoBehaviour
     public int maxStraight;
     public int averageStraight;
     public int padding;
+    
 
     private Vector2 direction;
     private Vector2Int startPosition;
