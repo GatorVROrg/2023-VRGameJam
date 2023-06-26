@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Generator3 : MonoBehaviour
 {
+
+    //TODO: Add redundency for checking out of index nodes and moving more than one  node at a time
     public GameObject roadPrefab;
     public Transform player;
     public Vector2Int startPosition;
@@ -86,8 +88,6 @@ public class Generator3 : MonoBehaviour
     }
 
 
-
-
     public void ChangeDirection() 
     {
         direction = new Vector2Int(direction.y, direction.x);
@@ -119,9 +119,6 @@ public class Generator3 : MonoBehaviour
 
         //TODO: Despawn buildings
     }
-
-    #endregion
-
 
     private void UpdateRoads()
     {
@@ -161,6 +158,8 @@ public class Generator3 : MonoBehaviour
                 currentNodeIndex--;
             }
         }
-    }
+    } 
+
+    #endregion
 
 }
