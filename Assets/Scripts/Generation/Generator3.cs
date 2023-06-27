@@ -7,6 +7,7 @@ public class Generator3 : MonoBehaviour
 
     //TODO: Add redundency for checking out of index nodes and moving more than one  node at a time
     public GameObject roadPrefab;
+    public GameObject turningRoadPrefab;
     public Transform player;
     public Vector2Int startPosition;
     public int levelDistance;
@@ -14,7 +15,7 @@ public class Generator3 : MonoBehaviour
     public int averageStraight;
     public GameObject[] buildingPrefabs;
     public int lookAhead;
-
+    public float spawnHeight;
 
     private Vector2Int direction;
     private List<Node> roads;
@@ -53,7 +54,8 @@ public class Generator3 : MonoBehaviour
         for (int i = 0; i < lookAhead; i++)
         {
             Node prependNode = new Node(prependPosition, currentRoadType);
-            prependNode.road = Instantiate(roadPrefab, new Vector3(prependPosition.x, .5f, prependPosition.y), Quaternion.identity);
+            prependNode.direction = direction;
+            prependNode.road = Instantiate(roadPrefab, new Vector3(prependPosition.x, spawnHeight, prependPosition.y), Quaternion.identity);
             prependNode.road.SetActive(false);
             prependedRoads.Add(prependNode);
             prependPosition += direction; // Move position one step in the same direction
@@ -62,7 +64,8 @@ public class Generator3 : MonoBehaviour
         // Generate normal roads
         prependPosition = startPosition;
         Node startNode = new Node(startPosition, currentRoadType);
-        startNode.road = Instantiate(roadPrefab, new Vector3(startPosition.x, .5f, startPosition.y), Quaternion.identity);
+        startNode.direction = direction;
+        startNode.road = Instantiate(roadPrefab, new Vector3(startPosition.x, spawnHeight, startPosition.y), Quaternion.identity);
         startNode.road.SetActive(false);
         roads.Add(startNode);
 
@@ -77,7 +80,8 @@ public class Generator3 : MonoBehaviour
             }
             Vector2Int nextPosition = roads[roads.Count - 1].position + direction;
             Node nextNode = new Node(nextPosition, currentRoadType);
-            nextNode.road = Instantiate(roadPrefab, new Vector3(nextPosition.x, .5f, nextPosition.y), Quaternion.identity);
+            nextNode.direction = direction;
+            nextNode.road = Instantiate(roadPrefab, new Vector3(nextPosition.x, spawnHeight, nextPosition.y), GetRotationFromDirection(direction));
             nextNode.road.SetActive(false);
             roads.Add(nextNode);
         }
@@ -90,8 +94,16 @@ public class Generator3 : MonoBehaviour
 
     public void ChangeDirection() 
     {
+        Vector2Int oldDirection = direction;
         direction = new Vector2Int(direction.y, direction.x);
+
+        if (oldDirection == Vector2Int.up && direction == Vector2Int.right)
+        {
+            roads[roads.Count - 1].road = Instantiate(turningRoadPrefab, roads[roads.Count - 1].road.transform.position, Quaternion.Euler(0, 180, 0));
+            roads[roads.Count - 1].road.SetActive(false);
+        }
     }
+
 
     public void InstantiateRoads() 
     {
@@ -110,14 +122,14 @@ public class Generator3 : MonoBehaviour
     {
         road.road.SetActive(true);
         
-        //TODO: Spawn buildings
+        SpawnBuildings(road);
     }
 
     private void DespawnRoad(Node road)
     {
         road.road.SetActive(false);
 
-        //TODO: Despawn buildings
+        DespawnBuildings(road);
     }
 
     private void UpdateRoads()
@@ -160,6 +172,63 @@ public class Generator3 : MonoBehaviour
         }
     } 
 
+    private Quaternion GetRotationFromDirection(Vector2Int direction)
+    {
+        // Change the rotation based on the direction
+        switch (direction)
+        {
+            case var d when d.Equals(new Vector2Int(0, 1)): // North
+                return Quaternion.Euler(0, 0, 0);
+            case var d when d.Equals(new Vector2Int(0, -1)): // South
+                return Quaternion.Euler(0, 180, 0);
+            case var d when d.Equals(new Vector2Int(1, 0)): // East
+                return Quaternion.Euler(0, 90, 0);
+            case var d when d.Equals(new Vector2Int(-1, 0)): // West
+                return Quaternion.Euler(0, -90, 0);
+            default:
+                return Quaternion.identity; // Default case should never be hit with your constraints
+        }
+    }
+
     #endregion
+
+    private void SpawnBuildings(Node road) 
+    {
+        if (road.leftBuilding == null) 
+        {
+            Vector2Int leftOffset = new Vector2Int(-road.direction.y, road.direction.x);
+            Vector2Int leftBuildingPos = road.position + leftOffset;
+            road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight, leftBuildingPos.y), Quaternion.identity);
+        }
+        else if (road.leftBuilding.tag == "Building")
+        {
+            road.leftBuilding.SetActive(true);
+        }
+
+        if (road.rightBuilding == null)
+        {
+            Vector2Int rightOffset = new Vector2Int(road.direction.y, -road.direction.x);  
+            Vector2Int rightBuildingPos = road.position + rightOffset;
+            road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight, rightBuildingPos.y), Quaternion.identity);
+        }
+        else if (road.rightBuilding.tag == "Building")
+        {
+            road.rightBuilding.SetActive(true);
+        }
+    }
+
+
+    private void DespawnBuildings(Node road) 
+    {
+        if (road.leftBuilding != null && road.leftBuilding.tag == "Building") 
+        {
+            road.leftBuilding.SetActive(false);
+        }
+
+        if (road.rightBuilding != null && road.rightBuilding.tag == "Building")
+        {
+            road.rightBuilding.SetActive(false);
+        }
+    }
 
 }

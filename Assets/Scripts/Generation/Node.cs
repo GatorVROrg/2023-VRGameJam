@@ -7,6 +7,7 @@ public class Node
     public GameObject road;
     public GameObject leftBuilding;
     public GameObject rightBuilding;
+    public Vector2Int direction;
 
     public Node(Vector2Int _position, string _type)
     {
