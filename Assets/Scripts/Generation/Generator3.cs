@@ -7,6 +7,7 @@ public class Generator3 : MonoBehaviour
 
     //TODO: Add redundency for checking out of index nodes and moving more than one  node at a time
     public GameObject roadPrefab;
+    public GameObject turningRoadPrefab;
     public Transform player;
     public Vector2Int startPosition;
     public int levelDistance;
@@ -93,8 +94,14 @@ public class Generator3 : MonoBehaviour
 
     public void ChangeDirection() 
     {
+        Vector2Int oldDirection = direction;
         direction = new Vector2Int(direction.y, direction.x);
-        roads[roads.Count - 1].direction = direction;
+
+        if (oldDirection == Vector2Int.up && direction == Vector2Int.right)
+        {
+            roads[roads.Count - 1].road = Instantiate(turningRoadPrefab, roads[roads.Count - 1].road.transform.position, Quaternion.Euler(0, 180, 0));
+            roads[roads.Count - 1].road.SetActive(false);
+        }
     }
 
 
@@ -122,7 +129,7 @@ public class Generator3 : MonoBehaviour
     {
         road.road.SetActive(false);
 
-        //TODO: Despawn buildings
+        DespawnBuildings(road);
     }
 
     private void UpdateRoads()
