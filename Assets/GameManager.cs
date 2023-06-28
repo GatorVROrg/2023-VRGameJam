@@ -37,13 +37,15 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         isGameOver = false;
-        //generator.StartGeneration();
+        generator.Generate(); //add ability to pass paramaters and base them on level
         currentScore = 0;
     }
 
     public void EndLevel()
     {
         totalScore += currentScore;
+        generator.UnGenerate();
+        //load next level and tp player to start. trigger delivery scene if its there
     }
 
     public void Die()

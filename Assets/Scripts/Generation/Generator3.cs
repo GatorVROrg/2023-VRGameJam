@@ -21,11 +21,12 @@ public class Generator3 : MonoBehaviour
     private List<Node> roads;
     private string currentRoadType;
     public int currentNodeIndex;
+    private bool active;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Generate()
     {
+        active = true;
         startPosition = new Vector2Int(0, 0);
         direction = new Vector2Int(0, 1);
         currentRoadType = "N";
@@ -36,9 +37,25 @@ public class Generator3 : MonoBehaviour
         InstantiateRoads();
     }
 
+    public void UnGenerate() 
+    {
+        active = false;
+        foreach (Node node in roads)
+        {
+            Destroy(node.road);
+            Destroy(node.leftBuilding);
+            Destroy(node.rightBuilding);
+            Destroy(node.cornerBuilding);
+        }
+        roads.Clear();
+    }
+
     void Update()
     {
-        UpdateRoads();
+        if (active)
+        {
+            UpdateRoads();
+        }
     }
 
     #region Roads

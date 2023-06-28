@@ -578,7 +578,7 @@ MonoBehaviour:
     type: 3}
   player: {fileID: 1106606667}
   startPosition: {x: 0, y: 0}
-  levelDistance: 400
+  levelDistance: 40
   maxStraight: 300
   averageStraight: 25
   buildingPrefabs:
