@@ -20,7 +20,7 @@ public class Generator3 : MonoBehaviour
     private Vector2Int direction;
     private List<Node> roads;
     private string currentRoadType;
-    private int currentNodeIndex;
+    public int currentNodeIndex;
 
 
     // Start is called before the first frame update
@@ -39,7 +39,6 @@ public class Generator3 : MonoBehaviour
     void Update()
     {
         UpdateRoads();
-        Debug.Log(roads[currentNodeIndex].position);
     }
 
     #region Roads
