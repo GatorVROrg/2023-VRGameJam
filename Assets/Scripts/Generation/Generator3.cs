@@ -20,12 +20,13 @@ public class Generator3 : MonoBehaviour
     private Vector2Int direction;
     private List<Node> roads;
     private string currentRoadType;
-    private int currentNodeIndex;
+    public int currentNodeIndex;
+    private bool active;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void Generate()
     {
+        active = true;
         startPosition = new Vector2Int(0, 0);
         direction = new Vector2Int(0, 1);
         currentRoadType = "N";
@@ -36,10 +37,25 @@ public class Generator3 : MonoBehaviour
         InstantiateRoads();
     }
 
+    public void UnGenerate() 
+    {
+        active = false;
+        foreach (Node node in roads)
+        {
+            Destroy(node.road);
+            Destroy(node.leftBuilding);
+            Destroy(node.rightBuilding);
+            Destroy(node.cornerBuilding);
+        }
+        roads.Clear();
+    }
+
     void Update()
     {
-        UpdateRoads();
-        Debug.Log(roads[currentNodeIndex].position);
+        if (active)
+        {
+            UpdateRoads();
+        }
     }
 
     #region Roads
@@ -100,6 +116,13 @@ public class Generator3 : MonoBehaviour
         if (oldDirection == Vector2Int.up && direction == Vector2Int.right)
         {
             roads[roads.Count - 1].road = Instantiate(turningRoadPrefab, roads[roads.Count - 1].road.transform.position, Quaternion.Euler(0, 180, 0));
+            SpawnCornerBuildings(roads[roads.Count - 1], oldDirection);
+            roads[roads.Count - 1].road.SetActive(false);
+        }
+        else if (oldDirection == Vector2Int.right && direction == Vector2Int.up)
+        {
+            roads[roads.Count - 1].road = Instantiate(turningRoadPrefab, roads[roads.Count - 1].road.transform.position, Quaternion.Euler(0, 0, 0));
+            SpawnCornerBuildings(roads[roads.Count - 1], oldDirection);
             roads[roads.Count - 1].road.SetActive(false);
         }
     }
@@ -135,7 +158,7 @@ public class Generator3 : MonoBehaviour
     private void UpdateRoads()
     {
         // The position of the player in terms of the roads array
-        Vector2Int playerRoadPosition = new Vector2Int(Mathf.FloorToInt(player.position.x), Mathf.FloorToInt(player.position.z));
+        Vector2Int playerRoadPosition = new Vector2Int(Mathf.RoundToInt(player.position.x), Mathf.RoundToInt(player.position.z));
 
         // Check if the player has moved to a new road
         if (roads[currentNodeIndex].position != playerRoadPosition)
@@ -215,6 +238,10 @@ public class Generator3 : MonoBehaviour
         {
             road.rightBuilding.SetActive(true);
         }
+        if (road.cornerBuilding != null)
+        {
+            road.cornerBuilding.SetActive(true);
+        }
     }
 
 
@@ -229,6 +256,46 @@ public class Generator3 : MonoBehaviour
         {
             road.rightBuilding.SetActive(false);
         }
+        if (road.cornerBuilding != null)
+        {
+            road.cornerBuilding.SetActive(false);
+        }
+    }
+
+    private void SpawnCornerBuildings(Node road, Vector2Int previousDir)
+    {
+        Vector2Int leftBuildingPos = Vector2Int.zero;
+        Vector2Int rightBuildingPos = Vector2Int.zero;
+        Vector2Int cornerBuildingPos = Vector2Int.zero;
+        if (previousDir == Vector2Int.up && direction == Vector2Int.right) 
+        {
+            Vector2Int leftOffset = new Vector2Int(-1, 0);
+            leftBuildingPos = road.position + leftOffset;
+
+            Vector2Int rightOffset = new Vector2Int(0, 1);
+            rightBuildingPos = road.position + rightOffset;
+
+            Vector2Int cornerOffset = new Vector2Int(-1, 1);
+            cornerBuildingPos = road.position + cornerOffset;
+        }
+        else if (previousDir == Vector2Int.right && direction == Vector2Int.up)
+        {
+            Vector2Int leftOffset = new Vector2Int(1, 0);
+            leftBuildingPos = road.position + leftOffset;
+
+            Vector2Int rightOffset = new Vector2Int(0, -1);
+            rightBuildingPos = road.position + rightOffset;
+
+            Vector2Int cornerOffset = new Vector2Int(1, -1);
+            cornerBuildingPos = road.position + cornerOffset;
+        }
+
+        road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight, leftBuildingPos.y), Quaternion.identity);
+        road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight, rightBuildingPos.y), Quaternion.identity);
+        road.cornerBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(cornerBuildingPos.x, spawnHeight, cornerBuildingPos.y), Quaternion.identity);
+        road.leftBuilding.SetActive(false);
+        road.rightBuilding.SetActive(false);
+        road.cornerBuilding.SetActive(false);
     }
 
 }
