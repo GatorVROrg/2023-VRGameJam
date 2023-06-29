@@ -25,6 +25,12 @@ public class Generator3 : MonoBehaviour
     public int currentNodeIndex;
     private bool active;
 
+    public GameObject mapCamera;
+    public GameObject nodePrefab;
+    public GameObject goalPrefab;
+    public GameObject currentNodePrefab;
+    public List<GameObject> mapNodes;
+
 
     public void Generate()
     {
@@ -37,6 +43,7 @@ public class Generator3 : MonoBehaviour
 
         GenerateRoads();
         InstantiateRoads();
+        InitialRender();
     }
 
     public void UnGenerate() 
@@ -61,6 +68,12 @@ public class Generator3 : MonoBehaviour
             }
         }
         roads.Clear();
+
+        foreach (GameObject node in mapNodes)
+        {
+            Destroy(node);
+        }
+        mapNodes.Clear();
     }
 
 
@@ -310,6 +323,20 @@ public class Generator3 : MonoBehaviour
         road.leftBuilding.SetActive(false);
         road.rightBuilding.SetActive(false);
         road.cornerBuilding.SetActive(false);
+    }
+
+    private void InitialRender()
+    {
+        for (int i = 0; i < roads.Count - 1; i++)
+        {
+            GameObject newNode = Instantiate(nodePrefab, new Vector3(roads[i].position.x + 5000, spawnHeight, roads[i].position.y), Quaternion.identity);
+            mapNodes.Add(newNode);
+        }
+
+        mapNodes.Add(Instantiate(goalPrefab, new Vector3(roads[roads.Count - 1].position.x + 5000, spawnHeight, roads[roads.Count - 1].position.y), Quaternion.identity));
+
+        Vector3 currentNodePosition = roads[currentNodeIndex].road.transform.position;
+        mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, currentNodePosition.y + 10, currentNodePosition.z);
     }
 
 }
