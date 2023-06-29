@@ -221,7 +221,7 @@ public class Generator3 : MonoBehaviour
         {
             Vector2Int leftOffset = new Vector2Int(-road.direction.y, road.direction.x);
             Vector2Int leftBuildingPos = road.position + leftOffset;
-            road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight, leftBuildingPos.y), Quaternion.identity);
+            road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight + .001f, leftBuildingPos.y), Quaternion.identity);
         }
         else if (road.leftBuilding.tag == "Building")
         {
@@ -232,7 +232,7 @@ public class Generator3 : MonoBehaviour
         {
             Vector2Int rightOffset = new Vector2Int(road.direction.y, -road.direction.x);  
             Vector2Int rightBuildingPos = road.position + rightOffset;
-            road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight, rightBuildingPos.y), Quaternion.identity);
+            road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight + .001f, rightBuildingPos.y), Quaternion.identity);
         }
         else if (road.rightBuilding.tag == "Building")
         {
@@ -290,9 +290,9 @@ public class Generator3 : MonoBehaviour
             cornerBuildingPos = road.position + cornerOffset;
         }
 
-        road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight, leftBuildingPos.y), Quaternion.identity);
-        road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight, rightBuildingPos.y), Quaternion.identity);
-        road.cornerBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(cornerBuildingPos.x, spawnHeight, cornerBuildingPos.y), Quaternion.identity);
+        road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight + .001f, leftBuildingPos.y), Quaternion.identity);
+        road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight + .001f, rightBuildingPos.y), Quaternion.identity);
+        road.cornerBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(cornerBuildingPos.x, spawnHeight + .001f, cornerBuildingPos.y), Quaternion.identity);
         road.leftBuilding.SetActive(false);
         road.rightBuilding.SetActive(false);
         road.cornerBuilding.SetActive(false);
