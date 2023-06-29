@@ -336,7 +336,7 @@ public class Generator3 : MonoBehaviour
         mapNodes.Add(Instantiate(goalPrefab, new Vector3(roads[roads.Count - 1].position.x + 5000, spawnHeight, roads[roads.Count - 1].position.y), Quaternion.identity));
 
         Vector3 currentNodePosition = roads[currentNodeIndex].road.transform.position;
-        mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, currentNodePosition.y + 10, currentNodePosition.z);
+        mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, currentNodePosition.y + 50, currentNodePosition.z);
     }
 
 }
