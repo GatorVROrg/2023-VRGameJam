@@ -69,6 +69,28 @@ public class Moped : MonoBehaviour
             }
         }
 
+        if(RgripValue == 0)
+        {
+            RHand.SetActive(true);
+            RHandOnBar.SetActive(false);
+        }
+        else
+        {
+            RHand.SetActive(false);
+            RHandOnBar.SetActive(true);
+        }
+
+        if(LgripValue == 0)
+        {
+            LHand.SetActive(true);
+            LHandOnBar.SetActive(false);
+        }
+        else
+        {
+            LHand.SetActive(false);
+            LHandOnBar.SetActive(true);
+        }
+
         if(Grabbed)
         {
             LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
@@ -136,32 +158,11 @@ public class Moped : MonoBehaviour
     public void OnGrab()
     {
         Grabbed = true;
-        if(RgripValue == 1)
-        {
-            RHand.SetActive(false);
-            RHandOnBar.SetActive(true);
-        }
-        if(LgripValue == 1)
-        {
-            LHand.SetActive(false);
-            LHandOnBar.SetActive(true);
-        }
     }
 
     public void OnRelease()
     {
         Grabbed = false;
-        if(RgripValue == 0)
-        {
-            RHand.SetActive(true);
-            RHandOnBar.SetActive(false);
-        }
-
-        if(LgripValue == 0)
-        {
-            LHand.SetActive(true);
-            LHandOnBar.SetActive(false);
-        }
     }
 
     public IEnumerator PauseVoices()
