@@ -25,6 +25,8 @@ public class Moped : MonoBehaviour
 
     public InputActionProperty LeftHandTrigger;
     public InputActionProperty RightHandTrigger;
+    public InputActionProperty LeftHandGrip;
+    public InputActionProperty RightHandGrip;
 
     public AudioClip[] voiceClips;
     public AudioSource voiceSource;
@@ -33,6 +35,8 @@ public class Moped : MonoBehaviour
     private Quaternion defaultRot;
     private float RtriggerValue;
     private float LtriggerValue;
+    private float RgripValue;
+    private float LgripValue;
     private bool Grabbed;
 
     private bool Accelerating;
@@ -50,6 +54,9 @@ public class Moped : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        LgripValue = LeftHandTrigger.action.ReadValue<float>();
+        RgripValue = RightHandTrigger.action.ReadValue<float>();
+
         if (playVoices)
         {
             int randomIndex = Random.Range(0, voiceClips.Length);
@@ -129,19 +136,32 @@ public class Moped : MonoBehaviour
     public void OnGrab()
     {
         Grabbed = true;
-        RHand.SetActive(false);
-        RHandOnBar.SetActive(true);
-        LHand.SetActive(false);
-        LHandOnBar.SetActive(true);
+        if(RgripValue == 1)
+        {
+            RHand.SetActive(false);
+            RHandOnBar.SetActive(true);
+        }
+        if(LgripValue == 1)
+        {
+            LHand.SetActive(false);
+            LHandOnBar.SetActive(true);
+        }
     }
 
     public void OnRelease()
     {
         Grabbed = false;
-        RHand.SetActive(true);
-        RHandOnBar.SetActive(false);
-        LHand.SetActive(true);
-        LHandOnBar.SetActive(false);
+        if(RgripValue == 0)
+        {
+            RHand.SetActive(true);
+            RHandOnBar.SetActive(false);
+        }
+
+        if(LgripValue == 0)
+        {
+            LHand.SetActive(true);
+            LHandOnBar.SetActive(false);
+        }
     }
 
     public IEnumerator PauseVoices()
