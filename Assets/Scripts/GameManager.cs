@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
         totalScore += currentScore;
         generator.UnGenerate();
         //load next level and tp player to start. trigger delivery scene if its there
+
+        SceneManager.LoadScene("Delivered");
     }
 
     public void Die()
