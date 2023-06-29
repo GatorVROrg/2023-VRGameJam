@@ -32,6 +32,8 @@ public class Generator3 : MonoBehaviour
     public GameObject currentNodePrefab;
     public List<GameObject> mapNodes;
     private GameObject playerDisplay;
+    public GameObject targetPrefab;
+    private GameObject target;
 
     public void Generate()
     {
@@ -75,6 +77,10 @@ public class Generator3 : MonoBehaviour
             Destroy(node);
         }
         mapNodes.Clear();
+        if (target!= null)
+        {
+            Destroy(target);
+        }
     }
 
 
@@ -202,6 +208,11 @@ public class Generator3 : MonoBehaviour
                 if (currentNodeIndex + lookAhead < roads.Count)
                 {
                     SpawnRoad(roads[currentNodeIndex + lookAhead]);
+
+                    if (currentNodeIndex + lookAhead == roads.Count - 1)
+                    {
+                        target = Instantiate(targetPrefab, new Vector3(roads[currentNodeIndex + lookAhead].position.x, spawnHeight, roads[currentNodeIndex + lookAhead].position.y), Quaternion.identity);
+                    }
                 }
 
                 currentNodeIndex++;

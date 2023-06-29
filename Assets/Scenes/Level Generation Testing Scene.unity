@@ -758,6 +758,8 @@ MonoBehaviour:
   currentNodePrefab: {fileID: 7149445015858744554, guid: aa8c88325c36dad409e2f3cfe702ea3b,
     type: 3}
   mapNodes: []
+  targetPrefab: {fileID: 2682899880384356897, guid: fc2d6f9e566f9194fb74d0c3e0df8c4a,
+    type: 3}
 --- !u!1 &1654128379
 GameObject:
   m_ObjectHideFlags: 0
