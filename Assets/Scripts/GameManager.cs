@@ -63,12 +63,6 @@ public class GameManager : MonoBehaviour
         StartLevel();
     }
 
-    void Start()
-    {
-        StartLevel();
-    }
-
-
     public void StartLevel()
     {
         isGameOver = false;

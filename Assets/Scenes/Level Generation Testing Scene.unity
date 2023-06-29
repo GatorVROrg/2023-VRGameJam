@@ -538,7 +538,7 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0}
   levelDistance: 80
   maxStraight: 300
-  averageStraight: 25
+  averageStraight: 10
   buildingPrefabs:
   - {fileID: 1974944504211695185, guid: 54b1480f9a9471f4eb450e6089e2cdbc, type: 3}
   - {fileID: 2027668553345649932, guid: bbe4ae52edaa72d4c9e82e1e20232207, type: 3}
@@ -811,6 +811,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1224759848}
+    - target: {fileID: 445146382667985773, guid: f6d9888969afa74479107003abc6d300,
+        type: 3}
+      propertyPath: averageStraight
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 669626535634160676, guid: f6d9888969afa74479107003abc6d300,
         type: 3}
       propertyPath: m_RootOrder
