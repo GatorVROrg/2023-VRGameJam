@@ -51,16 +51,19 @@ public class GameManager : MonoBehaviour
    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
         // Find the Generator3 instance and assign it to the generator3 member
-        Generator3 generator3 = FindObjectOfType<Generator3>();
-        if (generator3 != null) 
+        if (SceneManager.GetActiveScene().name == "Level Generation Testing Scene")
         {
-            generator = generator3;
-        } 
-        else 
-        {
-            Debug.LogError("No Generator3 instance found in scene");
+            Generator3 generator3 = FindObjectOfType<Generator3>();
+            if (generator3 != null) 
+            {
+                generator = generator3;
+            } 
+            else 
+            {
+                Debug.LogError("No Generator3 instance found in scene");
+            }
+            StartLevel();
         }
-        StartLevel();
     }
 
     public void StartLevel()

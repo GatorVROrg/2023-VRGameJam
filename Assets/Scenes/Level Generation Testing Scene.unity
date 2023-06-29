@@ -748,7 +748,7 @@ MonoBehaviour:
   - {fileID: 3039631545661061448, guid: 754987ca385a8f7488a6c934bfa20a23, type: 3}
   lookAhead: 15
   spawnHeight: 0
-  cameraDistance: 25
+  cameraDistance: 20
   currentNodeIndex: 0
   mapCamera: {fileID: 864885650}
   nodePrefab: {fileID: 2386348604062366977, guid: d6dba6aed0864ad43bd36c6fd8e1d8b8,
