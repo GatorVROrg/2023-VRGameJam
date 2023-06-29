@@ -37,7 +37,7 @@ public class Moped : MonoBehaviour
     private bool Accelerating;
     private bool Deccelerating;
 
-    private float value;
+    public float value;
 
     private float index = 0;
     private bool play = true;
