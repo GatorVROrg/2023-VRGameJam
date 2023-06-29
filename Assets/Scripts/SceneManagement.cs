@@ -15,7 +15,7 @@ public class SceneManagement : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("Game Scene");
+        SceneManager.LoadScene("Level Generation Testing Scene");
     }
     public void Quit()
     {
