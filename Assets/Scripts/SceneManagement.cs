@@ -40,13 +40,13 @@ public class SceneManagement : MonoBehaviour
             int randomIndex = Random.Range(0, voiceClips.Length);
             start.clip = voiceClips[randomIndex];
             start.Play();
-            StartCoroutine(PauseVoices(start.clip.length));
+            StartCoroutine(PauseVoices());
         }
     }
 
-    public IEnumerator PauseVoices(float Seconds)
+    public IEnumerator PauseVoices()
     {
-        yield return new WaitForSeconds(Seconds + 1);
+        yield return new WaitForSeconds(7);
         SceneManager.LoadScene("Level Generation Testing Scene");
     }
 }
