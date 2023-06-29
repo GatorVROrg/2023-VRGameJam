@@ -139,7 +139,7 @@ public class Moped : MonoBehaviour
     public IEnumerator Pause()
     {
         play = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(60);
         play = true;
     }
 }

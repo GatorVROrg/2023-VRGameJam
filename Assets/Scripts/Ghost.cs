@@ -53,7 +53,7 @@ public class Ghost : MonoBehaviour
     public IEnumerator Pause()
     {
         play = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(40);
         play = true;
     }
 }
