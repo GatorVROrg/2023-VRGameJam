@@ -18,7 +18,7 @@ public class Generator3 : MonoBehaviour
     public float spawnHeight;
 
     private Vector2Int direction;
-    private List<Node> roads;
+    public List<Node> roads;
     private string currentRoadType;
     public int currentNodeIndex;
     private bool active;

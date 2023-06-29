@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    // User Inputs
     public float degreesPerSecond = 15.0f;
     public float amplitude = 0.5f;
     public float frequency = 1f;
@@ -12,29 +11,24 @@ public class Ghost : MonoBehaviour
     public AudioClip[] audioClips;
     public AudioSource audioSource;
 
-    // Position Storage Variables
-    Vector3 posOffset = new Vector3();
-    Vector3 tempPos = new Vector3();
+    private float originalY;
     private float index = 0;
     private bool play = true;
 
-    // Use this for initialization
     void Start()
     {
-        // Store the starting position & rotation of the object
-        posOffset = transform.position;
+        // Store the starting y position of the object
+        originalY = transform.position.y;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Spin object around Y-Axis
         transform.Rotate(new Vector3(0f, Time.deltaTime * degreesPerSecond, 0f), Space.World);
 
-        // Float up/down with a Sin()
-        tempPos = posOffset;
-        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
-
+        // Float up/down with a Sin() on y axis only
+        Vector3 tempPos = transform.position;
+        tempPos.y = originalY + Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
         transform.position = tempPos;
 
         if (play)
