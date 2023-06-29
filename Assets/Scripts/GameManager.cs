@@ -54,12 +54,13 @@ public class GameManager : MonoBehaviour
         Generator3 generator3 = FindObjectOfType<Generator3>();
         if (generator3 != null) 
         {
-            // Set your reference here
+            generator = generator3;
         } 
         else 
         {
             Debug.LogError("No Generator3 instance found in scene");
         }
+        StartLevel();
     }
 
     void Start()
@@ -109,8 +110,9 @@ public class GameManager : MonoBehaviour
         {
             currentScore = generator.currentNodeIndex - generator.lookAhead;
         }
-        if (currentScore == generator.levelDistance)
+        if (currentScore == generator.levelDistance && !isGameOver)
         {
+            isGameOver = true;
             EndLevel();
         }
     }
