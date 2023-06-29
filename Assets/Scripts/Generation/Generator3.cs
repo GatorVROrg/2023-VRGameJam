@@ -18,6 +18,7 @@ public class Generator3 : MonoBehaviour
     public GameObject[] buildingPrefabs;
     public int lookAhead;
     public float spawnHeight;
+    public int cameraDistance;
 
     private Vector2Int direction;
     public List<Node> roads;
@@ -30,7 +31,7 @@ public class Generator3 : MonoBehaviour
     public GameObject goalPrefab;
     public GameObject currentNodePrefab;
     public List<GameObject> mapNodes;
-
+    private GameObject playerDisplay;
 
     public void Generate()
     {
@@ -204,6 +205,8 @@ public class Generator3 : MonoBehaviour
                 }
 
                 currentNodeIndex++;
+                UpdatePlayerDisplay();
+                UpdateCamera();
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
@@ -218,6 +221,8 @@ public class Generator3 : MonoBehaviour
                 SpawnRoad(roads[currentNodeIndex - lookAhead]);
 
                 currentNodeIndex--;
+                UpdatePlayerDisplay();
+                UpdateCamera();
             }
         }
     } 
@@ -336,7 +341,33 @@ public class Generator3 : MonoBehaviour
         mapNodes.Add(Instantiate(goalPrefab, new Vector3(roads[roads.Count - 1].position.x + 5000, spawnHeight, roads[roads.Count - 1].position.y), Quaternion.identity));
 
         Vector3 currentNodePosition = roads[currentNodeIndex].road.transform.position;
-        mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, currentNodePosition.y + 50, currentNodePosition.z);
+        mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, currentNodePosition.y + cameraDistance, currentNodePosition.z);
+        playerDisplay = Instantiate(currentNodePrefab, new Vector3(currentNodePosition.x + 5000, spawnHeight, currentNodePosition.z), Quaternion.identity);
     }
+
+    private void UpdatePlayerDisplay()
+    {
+        playerDisplay.transform.position = new Vector3(roads[currentNodeIndex].position.x + 5000, spawnHeight, roads[currentNodeIndex].position.y);
+        playerDisplay.transform.rotation = roads[currentNodeIndex].road.transform.rotation;
+    }
+
+    private void UpdateCamera() 
+    {
+        // Calculate the distance from the current node to the camera
+        float distance = Vector3.Distance(new Vector3(roads[currentNodeIndex].road.transform.position.x + 5000, 0, roads[currentNodeIndex].road.transform.position.z), 
+                                        new Vector3(mapCamera.transform.position.x, 0, mapCamera.transform.position.z));
+
+        // Check if the distance is greater than half the camera distance
+        if (distance > cameraDistance / 2)
+        {
+            // Get the position of the current node
+            Vector3 currentNodePosition = roads[currentNodeIndex].road.transform.position;
+            
+            // Teleport the camera to the location of the current node with an offset
+            mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, mapCamera.transform.position.y, currentNodePosition.z + cameraDistance / 2 - 1);
+        }
+    }
+
+
 
 }
