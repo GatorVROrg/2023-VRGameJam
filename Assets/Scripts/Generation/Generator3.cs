@@ -44,13 +44,25 @@ public class Generator3 : MonoBehaviour
         active = false;
         foreach (Node node in roads)
         {
-            Destroy(node.road);
-            Destroy(node.leftBuilding);
-            Destroy(node.rightBuilding);
-            Destroy(node.cornerBuilding);
+            if (node == null)
+            {
+                Debug.LogError("Node is null!");
+            }
+            else if (node.road == null)
+            {
+                Debug.LogError("Node's road is null!");
+            }
+            else
+            {
+                Destroy(node.road);
+                Destroy(node.leftBuilding);
+                Destroy(node.rightBuilding);
+                Destroy(node.cornerBuilding);
+            }
         }
         roads.Clear();
     }
+
 
     void Update()
     {

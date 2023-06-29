@@ -17,9 +17,12 @@ public class GhostMovement : MonoBehaviour
     {
         if (waypoints.Count == 0)
         {
-            for (int i = 0; i  < generator.roads.Count; i++)
+            if (generator != null)
             {
-                waypoints.Add(generator.roads[i].road.transform);
+                for (int i = 0; i  < generator.roads.Count; i++)
+                {
+                    waypoints.Add(generator.roads[i].road.transform);
+                }
             }
         }
         else {
