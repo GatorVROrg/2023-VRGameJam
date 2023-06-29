@@ -78,11 +78,11 @@ public class Moped : MonoBehaviour
 
                 if(value >= 0.7)
                 {
-                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue);
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue - .7f);
                 }
                 if(value <= 0.3)
                 {
-                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue);                
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue + .3f);                
                 }
             }
             else if(Deccelerating && !Accelerating)
