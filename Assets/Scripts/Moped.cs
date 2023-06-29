@@ -57,21 +57,25 @@ public class Moped : MonoBehaviour
             float brakeForce = brakeInput * brakeSpeed * -1;
 
             // Apply the acceleration and brake forces to the car's rigidbody
-            RB.AddForce(RearDrive.forward * accelerationForce);
-            RB.AddForce(RearDrive.forward * brakeForce);
+            RB.AddForce(RearDrive.forward * accelerationForce * Time.deltaTime);
+            RB.AddForce(RearDrive.forward * brakeForce * Time.deltaTime);
 
             // Limit the car's speed to the maximum speed
             RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
 
             // Calculate how much you have turned
             float dot =  Vector3.Dot(RearDrive.right, Handles.forward);
+
+            // Turn the front wheel
+            float newRot = Mathf.Clamp(FrontDrive.rotation.y + (dot * 35 * Time.deltaTime), -35, 35);
+            FrontDrive.rotation = Quaternion.Euler(FrontDrive.rotation.x, newRot, FrontDrive.rotation.z);
             
             if(Mathf.Abs(dot) < 0.25)
             {
                 dot = 0;
             }
             float angle = Vector3.Angle(RearDrive.forward, Handles.forward) * -1;
-            RB.AddTorque(Vector3.up * dot * turningSpeed);
+            RB.AddTorque(Vector3.up * dot * turningSpeed * Time.deltaTime);
 
         }
     }
