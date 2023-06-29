@@ -26,8 +26,9 @@ public class Moped : MonoBehaviour
     public InputActionProperty LeftHandTrigger;
     public InputActionProperty RightHandTrigger;
 
-    public AudioClip[] audioClips;
-    public AudioSource audioSource;
+    public AudioClip[] voiceClips;
+    public AudioSource voiceSource;
+    public AudioSource engineSource;
 
     private Quaternion defaultRot;
     private float RtriggerValue;
@@ -39,8 +40,8 @@ public class Moped : MonoBehaviour
 
     public float value;
 
-    private float index = 0;
-    private bool play = true;
+    private float VoicesIndex = 0;
+    private bool playVoices = true;
 
     void Start()
     {
@@ -49,6 +50,18 @@ public class Moped : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (playVoices)
+        {
+            int randomIndex = Random.Range(0, voiceClips.Length);
+            if(randomIndex != VoicesIndex)
+            {
+                voiceSource.clip = voiceClips[randomIndex];
+                voiceSource.Play();
+                VoicesIndex = randomIndex;
+                StartCoroutine(PauseVoices());
+            }
+        }
+
         if(Grabbed)
         {
             LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
@@ -75,18 +88,13 @@ public class Moped : MonoBehaviour
 
             if(Accelerating)
             {
-                if (play)
-                {
-                    int randomIndex = Random.Range(0, audioClips.Length);
-                    if(randomIndex != index)
-                    {
-                        audioSource.clip = audioClips[randomIndex];
-                        audioSource.Play();
-                        index = randomIndex;
-                        StartCoroutine(Pause());
-                    }
-                }
+                engineSource.mute = false;
             }
+            else
+            {
+                engineSource.mute = true;
+            }
+
             if(Accelerating && !Deccelerating)
             {
                 speed = Mathf.Clamp(speed + (accelerationSpeed * Time.deltaTime), 0, maxSpeed);
@@ -136,10 +144,10 @@ public class Moped : MonoBehaviour
         LHandOnBar.SetActive(false);
     }
 
-    public IEnumerator Pause()
+    public IEnumerator PauseVoices()
     {
-        play = false;
+        playVoices = false;
         yield return new WaitForSeconds(60);
-        play = true;
+        playVoices = true;
     }
 }
