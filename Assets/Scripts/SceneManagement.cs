@@ -7,8 +7,6 @@ public class SceneManagement : MonoBehaviour
 {
     public AudioSource start;
     public AudioClip[] voiceClips;
-
-    private float VoicesIndex = 0;
     public void OpenCredits()
     {
         SceneManager.LoadScene("Credits Scene");
