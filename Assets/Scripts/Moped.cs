@@ -26,15 +26,21 @@ public class Moped : MonoBehaviour
     public InputActionProperty LeftHandTrigger;
     public InputActionProperty RightHandTrigger;
 
+    public AudioClip[] audioClips;
+    public AudioSource audioSource;
+
     private Quaternion defaultRot;
     private float RtriggerValue;
     private float LtriggerValue;
-    public bool Grabbed;
+    private bool Grabbed;
 
-    public bool Accelerating;
-    public bool Deccelerating;
+    private bool Accelerating;
+    private bool Deccelerating;
 
-    public float value;
+    private float value;
+
+    private float index = 0;
+    private bool play = true;
 
     void Start()
     {
@@ -67,11 +73,21 @@ public class Moped : MonoBehaviour
                 Deccelerating = false;
             }
 
-            if(Accelerating && Deccelerating)
+            if(Accelerating)
             {
-                Debug.Log("stop fucking doing that");
+                if (play)
+                {
+                    int randomIndex = Random.Range(0, audioClips.Length);
+                    if(randomIndex != index)
+                    {
+                        audioSource.clip = audioClips[randomIndex];
+                        audioSource.Play();
+                        index = randomIndex;
+                        StartCoroutine(Pause());
+                    }
+                }
             }
-            else if(Accelerating && !Deccelerating)
+            if(Accelerating && !Deccelerating)
             {
                 speed = Mathf.Clamp(speed + (accelerationSpeed * Time.deltaTime), 0, maxSpeed);
                 character.Move(Director.transform.forward * Time.fixedDeltaTime * speed);
@@ -120,14 +136,10 @@ public class Moped : MonoBehaviour
         LHandOnBar.SetActive(false);
     }
 
-    // public void WhipThisShit()
-    // {
-        
-    // }
-
-    // public void Slow()
-    // {
-    //     Accelerating = false;
-    //     Deccelerating = false;
-    // }
+    public IEnumerator Pause()
+    {
+        play = false;
+        yield return new WaitForSeconds(10);
+        play = true;
+    }
 }
