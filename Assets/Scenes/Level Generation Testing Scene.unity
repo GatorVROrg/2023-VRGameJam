@@ -229,104 +229,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26011292}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &143628245
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1256713590742842469, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -1256713590742842469, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -1256713590742842469, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1256713590742842469, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1256713590742842469, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 2746bd18694b93a4ea3c13632a882a8d,
-        type: 3}
-      propertyPath: m_Name
-      value: ArrowThingy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2746bd18694b93a4ea3c13632a882a8d, type: 3}
 --- !u!1 &378852301
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,13 +748,15 @@ MonoBehaviour:
   - {fileID: 3039631545661061448, guid: 754987ca385a8f7488a6c934bfa20a23, type: 3}
   lookAhead: 15
   spawnHeight: 0
+  cameraDistance: 25
   currentNodeIndex: 0
   mapCamera: {fileID: 864885650}
   nodePrefab: {fileID: 2386348604062366977, guid: d6dba6aed0864ad43bd36c6fd8e1d8b8,
     type: 3}
   goalPrefab: {fileID: 3867095219432716025, guid: 4610ddbeb19725d4483e61d96907686a,
     type: 3}
-  currentNodePrefab: {fileID: 0}
+  currentNodePrefab: {fileID: 7149445015858744554, guid: aa8c88325c36dad409e2f3cfe702ea3b,
+    type: 3}
   mapNodes: []
 --- !u!1 &1654128379
 GameObject:

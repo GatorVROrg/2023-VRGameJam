@@ -206,6 +206,7 @@ public class Generator3 : MonoBehaviour
 
                 currentNodeIndex++;
                 UpdatePlayerDisplay();
+                UpdateCamera();
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
@@ -221,6 +222,7 @@ public class Generator3 : MonoBehaviour
 
                 currentNodeIndex--;
                 UpdatePlayerDisplay();
+                UpdateCamera();
             }
         }
     } 
@@ -349,8 +351,23 @@ public class Generator3 : MonoBehaviour
         playerDisplay.transform.rotation = roads[currentNodeIndex].road.transform.rotation;
     }
 
-    private void UpdateCamera() {
+    private void UpdateCamera() 
+    {
+        // Calculate the distance from the current node to the camera
+        float distance = Vector3.Distance(new Vector3(roads[currentNodeIndex].road.transform.position.x + 5000, 0, roads[currentNodeIndex].road.transform.position.z), 
+                                        new Vector3(mapCamera.transform.position.x, 0, mapCamera.transform.position.z));
 
+        // Check if the distance is greater than half the camera distance
+        if (distance > cameraDistance / 2)
+        {
+            // Get the position of the current node
+            Vector3 currentNodePosition = roads[currentNodeIndex].road.transform.position;
+            
+            // Teleport the camera to the location of the current node with an offset
+            mapCamera.transform.position = new Vector3(currentNodePosition.x + 5000, mapCamera.transform.position.y, currentNodePosition.z + cameraDistance / 2 - 1);
+        }
     }
+
+
 
 }
