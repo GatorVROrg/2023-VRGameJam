@@ -9,6 +9,8 @@ namespace UnityEngine.XR.Content.Interaction
     /// </summary>
     public class XRKnob : XRBaseInteractable
     {
+        public Moped moped;
+
         const float k_ModeSwitchDeadZone = 0.1f; // Prevents rapid switching between the different rotation tracking modes
 
         /// <summary>
@@ -356,6 +358,8 @@ namespace UnityEngine.XR.Content.Interaction
 
             m_Value = value;
             m_OnValueChange.Invoke(m_Value);
+
+            moped.value = value;
         }
 
         float ValueToRotation()

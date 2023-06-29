@@ -5,12 +5,11 @@ using UnityEngine.InputSystem;
 
 public class Moped : MonoBehaviour
 {
-    private Rigidbody RB;
-
-    public Transform FrontDrive;
-    public Transform RearDrive;
-    public Transform Handles;
-
+    public GameObject Parent;
+    public CharacterController character;
+    public Transform Director;
+    public Transform HandleBars;
+    public Transform FrontWheel;
 
     public GameObject RHandOnBar;
     public GameObject LHandOnBar;
@@ -18,93 +17,117 @@ public class Moped : MonoBehaviour
     public GameObject RHand;
     public GameObject LHand;
 
-    public float accelerationSpeed = 5f;
-    public float turningSpeed = 1f;
-    public float brakeSpeed = 10f;
-    public float maxSpeed = 10f;
+    public float speed;
+    public float accelerationSpeed;
+    public float brakeSpeed;
+    public float maxSpeed;
+    public int rotationValue;
 
     public InputActionProperty LeftHandTrigger;
     public InputActionProperty RightHandTrigger;
 
-    public bool LeftHandGrab { get; set; }
-    public bool RightHandGrab { get; set; }
-
-
-    private float acceleratorInput;
-    private float brakeInput;
+    private Quaternion defaultRot;
+    private float RtriggerValue;
+    private float LtriggerValue;
     public bool Grabbed;
 
-    private Vector3 HandlesOffset;
+    public bool Accelerating;
+    public bool Deccelerating;
+
+    public float value;
 
     void Start()
     {
-        RB = GetComponent<Rigidbody>();
-        //HandlesOffset = Handles.position - transform.position;
+        defaultRot = HandleBars.localRotation;
     }
     // Update is called once per frame
-    void Update()
-    {        
-       // Handles.transform.position = HandlesOffset + transform.position;
-        if (Grabbed)
+    void FixedUpdate()
+    {
+        if(Grabbed)
         {
-            brakeInput = LeftHandTrigger.action.ReadValue<float>();
-            acceleratorInput = RightHandTrigger.action.ReadValue<float>();
+            LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
+            RtriggerValue = RightHandTrigger.action.ReadValue<float>();
 
-            // Calculate acceleration force based on the accelerator input
-            float accelerationForce = acceleratorInput * accelerationSpeed;
+            FrontWheel.localRotation = Quaternion.Euler(FrontWheel.localRotation.x, FrontWheel.localRotation.y, HandleBars.localRotation.y * 50);
             
-            // Calculate brake force based on the brake input
-            float brakeForce = brakeInput * brakeSpeed * -1;
-
-            // Apply the acceleration and brake forces to the car's rigidbody
-            RB.AddForce(RearDrive.forward * accelerationForce);
-            RB.AddForce(RearDrive.forward * brakeForce);
-
-            // Limit the car's speed to the maximum speed
-            RB.velocity = Vector3.ClampMagnitude(RB.velocity, maxSpeed);
-
-            // Calculate how much you have turned
-            float dot =  Vector3.Dot(RearDrive.right, Handles.forward);
-            
-            if(Mathf.Abs(dot) < 0.25)
+            if(RtriggerValue == 1)
             {
-                dot = 0;
+                Accelerating = true;
             }
-            float angle = Vector3.Angle(RearDrive.forward, Handles.forward) * -1;
-            RB.AddTorque(Vector3.up * dot * turningSpeed);
+            else
+            {
+                Accelerating = false;
+            }
+            if(LtriggerValue == 1)
+            {
+                Deccelerating = true;
+            }
+            else
+            {
+                Deccelerating = false;
+            }
 
+            if(Accelerating && Deccelerating)
+            {
+                Debug.Log("stop fucking doing that");
+            }
+            else if(Accelerating && !Deccelerating)
+            {
+                speed = Mathf.Clamp(speed + (accelerationSpeed * Time.deltaTime), 0, maxSpeed);
+                character.Move(Director.transform.forward * Time.fixedDeltaTime * speed);
+
+                if(value >= 0.7)
+                {
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue);
+                }
+                if(value <= 0.3)
+                {
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue);                
+                }
+            }
+            else if(Deccelerating && !Accelerating)
+            {
+                speed = Mathf.Clamp(speed + (brakeSpeed * Time.deltaTime), 0, maxSpeed);
+                character.Move(Director.transform.forward * Time.fixedDeltaTime * -speed);
+
+                if(value >= 0.8)
+                {
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue);
+                }
+                if(value <= 0.2)
+                {
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue);                
+                }
+            }
         }
     }
 
     public void OnGrab()
     {
         Grabbed = true;
-
-        if (LeftHandGrab)
-        {
-            LHand.SetActive(false);
-            LHandOnBar.SetActive(true);
-        }
-        if (RightHandGrab)
-        {
-            RHand.SetActive(false);
-            RHandOnBar.SetActive(true);
-        }
+        RHand.SetActive(false);
+        RHandOnBar.SetActive(true);
+        LHand.SetActive(false);
+        LHandOnBar.SetActive(true);
     }
 
     public void OnRelease()
     {
         Grabbed = false;
-
-        if (!LeftHandGrab)
-        {
-            LHand.SetActive(true);
-            LHandOnBar.SetActive(false);
-        }
-        if (!RightHandGrab)
-        {
-            RHand.SetActive(true);
-            RHandOnBar.SetActive(false);
-        }
+        RHand.SetActive(true);
+        RHandOnBar.SetActive(false);
+        LHand.SetActive(true);
+        LHandOnBar.SetActive(false);
     }
+
+    // public void WhipThisShit()
+    // {
+        
+    // }
+
+    // public void Slow()
+    // {
+    //     Accelerating = false;
+    //     Deccelerating = false;
+    // }
 }

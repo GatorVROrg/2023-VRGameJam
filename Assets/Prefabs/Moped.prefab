@@ -1020,7 +1020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8478784330605363428}
   - component: {fileID: 5510427780563605834}
-  - component: {fileID: 5995536826482303772}
+  - component: {fileID: 6935559549206413297}
   m_Layer: 0
   m_Name: Moped
   m_TagString: Untagged
@@ -1065,18 +1065,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent: {fileID: 4478334198359983930}
-  RB: {fileID: 5995536826482303772}
-  Director: {fileID: 1548967260279655893}
-  Player: {fileID: 4438037808892559949}
+  character: {fileID: 6935559549206413297}
+  Director: {fileID: 2137277529099329729}
   HandleBars: {fileID: 4285582807065256947}
   FrontWheel: {fileID: 5779103720172592633}
   RHandOnBar: {fileID: 4403502699638709429}
   LHandOnBar: {fileID: 4602133904792802575}
   RHand: {fileID: 8322132248665050154}
   LHand: {fileID: 4329042883399963101}
+  speed: 10
   accelerationSpeed: 5
   brakeSpeed: 10
-  maxSpeed: 10
+  maxSpeed: 40
+  rotationValue: 2
   LeftHandTrigger:
     m_UseReference: 1
     m_Action:
@@ -1088,7 +1089,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   RightHandTrigger:
     m_UseReference: 1
@@ -1101,36 +1102,38 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   Grabbed: 0
---- !u!54 &5995536826482303772
-Rigidbody:
+  Accelerating: 0
+  Deccelerating: 0
+  value: 0
+--- !u!143 &6935559549206413297
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4478334198359983930}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4743173385077850983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,34 +2464,10 @@ MonoBehaviour:
         m_CallState: 2
   m_Activated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5510427780563605834}
-        m_TargetAssemblyTypeName: Moped, Assembly-CSharp
-        m_MethodName: WhipThisShit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_Deactivated:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5510427780563605834}
-        m_TargetAssemblyTypeName: Moped, Assembly-CSharp
-        m_MethodName: Slow
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
@@ -2519,11 +2498,12 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+  moped: {fileID: 5510427780563605834}
   m_Handle: {fileID: 4285582807065256947}
   m_Value: 0.5
   m_ClampedMotion: 1
-  m_MaxAngle: 90
-  m_MinAngle: -90
+  m_MaxAngle: 60
+  m_MinAngle: -60
   m_AngleIncrement: 0
   m_PositionTrackedRadius: 0.05
   m_TwistSensitivity: 0
@@ -2905,7 +2885,7 @@ PrefabInstance:
     - target: {fileID: 5353980421589192951, guid: c29c104753b087d49aeecad9182720d7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40
+      value: -9.8
       objectReference: {fileID: 0}
     - target: {fileID: 5353980421589192951, guid: c29c104753b087d49aeecad9182720d7,
         type: 3}
@@ -3029,12 +3009,6 @@ GameObject:
 --- !u!4 &4438037808892559947 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5353980421589192951, guid: c29c104753b087d49aeecad9182720d7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8636280159000007356}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4438037808892559949 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5353980421589192945, guid: c29c104753b087d49aeecad9182720d7,
     type: 3}
   m_PrefabInstance: {fileID: 8636280159000007356}
   m_PrefabAsset: {fileID: 0}
