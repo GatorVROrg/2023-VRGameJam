@@ -54,8 +54,8 @@ public class Moped : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        LgripValue = LeftHandTrigger.action.ReadValue<float>();
-        RgripValue = RightHandTrigger.action.ReadValue<float>();
+        LgripValue = LeftHandGrip.action.ReadValue<float>();
+        RgripValue = RightHandGrip.action.ReadValue<float>();
 
         if (playVoices)
         {
