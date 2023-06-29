@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagement : MonoBehaviour
 {
+    public AudioSource start;
     public void OpenCredits()
     {
         SceneManager.LoadScene("Credits Scene");
@@ -15,10 +16,17 @@ public class SceneManagement : MonoBehaviour
     }
     public void StartGame()
     {
-        SceneManager.LoadScene("Level Generation Testing Scene");
+        start.Play();
+        StartCoroutine(wait());
     }
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public IEnumerator wait()
+    {
+        yield return new WaitForSeconds(16);
+        SceneManager.LoadScene("Level Generation Testing Scene");
     }
 }
