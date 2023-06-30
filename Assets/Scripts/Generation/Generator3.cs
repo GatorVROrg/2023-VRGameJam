@@ -190,7 +190,7 @@ public class Generator3 : MonoBehaviour
         SpawnBuildings(road);
 
         int random = Random.Range(0, carSpawnDenominator);
-        if (random == 0)
+        if (random == 0 && currentNodeIndex != lookAhead)
         {
             SpawnCar(road);
         }
@@ -435,7 +435,7 @@ public class Generator3 : MonoBehaviour
 
         // Add waypoints with offset depending on the lane
         int roadIndex = roads.IndexOf(road);
-        if (lane == 0) // For cars in the left lane
+        if (lane == 1 || lane == 2) // For cars in the left lane
         {
             for (int i = roadIndex; i < roads.Count; i++)
             {
@@ -443,7 +443,7 @@ public class Generator3 : MonoBehaviour
                 waypointList.Add(waypointPosition);
             }
         }
-        else if (lane == 1 || lane == 2) // For cars in the middle and right lanes
+        else if (lane == 0) // For cars in the middle and right lanes
         {
             for (int i = roadIndex; i >= 0; i--)
             {

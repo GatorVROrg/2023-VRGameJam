@@ -4,6 +4,7 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour
 {
     public float speed = 1.0f;
+    public float rotationSpeed = 10.0f;
     public int waypointIndex = 0;
     public List<Vector3> waypoints;
 
@@ -14,7 +15,7 @@ public class CarMovement : MonoBehaviour
     void Update()
     {
         if (waypoints.Count != 0) {
-            // If the ghost has reached the current waypoint...
+            // If the car has reached the current waypoint...
             if (Vector3.Distance(transform.position, waypoints[waypointIndex]) < 0.1f)
             {
                 // Move on to the next waypoint
@@ -29,13 +30,13 @@ public class CarMovement : MonoBehaviour
             // Move towards the current waypoint
             transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex], speed * Time.deltaTime);
 
-            // Face towards the next waypoint
-            Vector3 direction = waypoints[waypointIndex] - transform.position;
-            if (direction != Vector3.zero)
-            {
-                Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-                transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
-            }
+            // Calculate direction to the next waypoint
+            Vector3 targetDirection = (waypoints[waypointIndex] - transform.position).normalized;
+
+            // Calculate a rotation a step closer to the target and applies rotation to this object
+            float singleStep = rotationSpeed * Time.deltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
 
             if (waypointIndex == waypoints.Count - 1)
             {
