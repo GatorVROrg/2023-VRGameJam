@@ -109,7 +109,8 @@ public class GameManager : MonoBehaviour
 
     public void Die(string message)
     {
-        // Any additional game over logic
+        isActiveInstance = false;
+        SceneManager.LoadScene("DeathScene");
     }
 
 
@@ -128,7 +129,6 @@ public class GameManager : MonoBehaviour
             {
                 Die("Ghost caught the player");
                 Debug.Log("Ghost caught the player");
-                isActiveInstance = false;
             }
 
         }
