@@ -75,6 +75,7 @@ public class Moped : MonoBehaviour
             }
         }
 
+        StartCoroutine(PauseAmbiance());
         if (playAmbiance)
         {
             int randomIndex = Random.Range(0, ambianceClips.Length);
@@ -89,28 +90,28 @@ public class Moped : MonoBehaviour
 
         if(Grabbed)
         {
-            if(RgripValue == 0)
-            {
-                RHand.SetActive(true);
-                RHandOnBar.SetActive(false);
-            }
-            else
+            if(RgripValue == 1)
             {
                 RHand.SetActive(false);
                 RHandOnBar.SetActive(true);
             }
-
-            if(LgripValue == 0)
-            {
-                LHand.SetActive(true);
-                LHandOnBar.SetActive(false);
-            }
             else
+            {
+                RHand.SetActive(true);
+                RHandOnBar.SetActive(false);
+            }
+
+            if(LgripValue == 1)
             {
                 LHand.SetActive(false);
                 LHandOnBar.SetActive(true);
             }
-            
+            else
+            {
+                LHand.SetActive(true);
+                LHandOnBar.SetActive(false);
+            }
+
             LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
             RtriggerValue = RightHandTrigger.action.ReadValue<float>();
 
