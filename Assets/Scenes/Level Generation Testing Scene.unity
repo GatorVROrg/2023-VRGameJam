@@ -662,7 +662,7 @@ MonoBehaviour:
   ghost: {fileID: 0}
   ghostDisplayPrefab: {fileID: 6036242423137934288, guid: 83b79c9325d7697438effe281b30dcf7,
     type: 3}
-  carSpawnDenominator: 3
+  carSpawnDenominator: 1
   carPrefabs:
   - {fileID: 6211735790044191046, guid: b753edee08c7b9d4794d863f510087dd, type: 3}
   - {fileID: 4206601170887834641, guid: ccc3223c343ff0b48bdc85aa8395a9cb, type: 3}
@@ -858,10 +858,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: Moped
       objectReference: {fileID: 0}
+    - target: {fileID: 5510427780563605834, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510427780563605834, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: rotationValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5510427780563605834, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: accelerationSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8478784330605363428, guid: f0355f04358227e4db2e4c4a030671b5,
         type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478784330605363428, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478784330605363428, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478784330605363428, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0007
       objectReference: {fileID: 0}
     - target: {fileID: 8478784330605363428, guid: f0355f04358227e4db2e4c4a030671b5,
         type: 3}

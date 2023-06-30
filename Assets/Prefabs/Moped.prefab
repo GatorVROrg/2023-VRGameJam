@@ -1099,8 +1099,8 @@ MonoBehaviour:
   speed: 0.5
   accelerationSpeed: 0.25
   brakeSpeed: 0.5
-  maxSpeed: 2
-  rotationValue: 2
+  maxSpeed: 10
+  rotationValue: 1
   LeftHandTrigger:
     m_UseReference: 1
     m_Action:

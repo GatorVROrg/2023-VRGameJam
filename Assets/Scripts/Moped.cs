@@ -21,7 +21,7 @@ public class Moped : MonoBehaviour
     public float accelerationSpeed;
     public float brakeSpeed;
     public float maxSpeed;
-    public int rotationValue;
+    public float rotationValue;
 
     public InputActionProperty LeftHandTrigger;
     public InputActionProperty RightHandTrigger;
@@ -149,13 +149,13 @@ public class Moped : MonoBehaviour
                 speed = Mathf.Clamp(speed + (accelerationSpeed * Time.deltaTime), 0, maxSpeed);
                 character.Move(Director.transform.forward * Time.fixedDeltaTime * speed);
 
-                if(value >= 0.7)
+                if(value >= 0.8)
                 {
-                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue - .7f);
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, rotationValue - 0.7f);
                 }
-                if(value <= 0.3)
+                if(value <= 0.2)
                 {
-                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue + .3f);                
+                    Parent.transform.rotation *= Quaternion.Euler(0, 0, -rotationValue + 0.3f);                
                 }
             }
             else if(Deccelerating && !Accelerating)
