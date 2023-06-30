@@ -264,7 +264,8 @@ public class Generator3 : MonoBehaviour
         {
             Vector2Int leftOffset = new Vector2Int(-road.direction.y, road.direction.x);
             Vector2Int leftBuildingPos = road.position + leftOffset;
-            road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight + .001f, leftBuildingPos.y), Quaternion.identity);
+            Quaternion leftBuildingRotation = Quaternion.LookRotation(new Vector3(-road.direction.x, 0, -road.direction.y));
+            road.leftBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(leftBuildingPos.x, spawnHeight + .001f, leftBuildingPos.y), leftBuildingRotation);
         }
         else if (road.leftBuilding.tag == "Building")
         {
@@ -275,7 +276,8 @@ public class Generator3 : MonoBehaviour
         {
             Vector2Int rightOffset = new Vector2Int(road.direction.y, -road.direction.x);  
             Vector2Int rightBuildingPos = road.position + rightOffset;
-            road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight + .001f, rightBuildingPos.y), Quaternion.identity);
+            Quaternion rightBuildingRotation = Quaternion.LookRotation(new Vector3(road.direction.x, 0, road.direction.y));
+            road.rightBuilding = Instantiate(buildingPrefabs[Random.Range(0, buildingPrefabs.Length)], new Vector3(rightBuildingPos.x, spawnHeight + .001f, rightBuildingPos.y), rightBuildingRotation);
         }
         else if (road.rightBuilding.tag == "Building")
         {
@@ -286,6 +288,7 @@ public class Generator3 : MonoBehaviour
             road.cornerBuilding.SetActive(true);
         }
     }
+
 
 
     private void DespawnBuildings(Node road) 

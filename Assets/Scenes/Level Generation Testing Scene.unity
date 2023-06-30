@@ -982,6 +982,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b20908686bb90544b927560b3af700e1, type: 2}
+    - target: {fileID: 4438037808892559948, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_CameraYOffset
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438037808892559948, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_RequestedTrackingOriginMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4478334198359983930, guid: f0355f04358227e4db2e4c4a030671b5,
         type: 3}
       propertyPath: m_Name

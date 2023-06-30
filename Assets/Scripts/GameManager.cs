@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Delivered");
     }
 
-    public void Die()
+    public void Die(string message)
     {
         // Any additional game over logic
     }
@@ -123,6 +123,6 @@ public class GameManager : MonoBehaviour
     void UpdateText()
     {
         int total = totalScore + currentScore;
-        scoreText.text = "Total Score: " + total + "\nLevel: " + currentLevel;
+        scoreText.text = "Total Score: " + total + "\nLevel: " + (currentLevel + 1);
     }
 }
