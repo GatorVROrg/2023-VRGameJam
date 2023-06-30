@@ -88,30 +88,30 @@ public class Moped : MonoBehaviour
             }
         }
 
+        if(RgripValue == 1)
+        {
+            RHand.SetActive(false);
+            RHandOnBar.SetActive(true);
+        }
+        else
+        {
+            RHand.SetActive(true);
+            RHandOnBar.SetActive(false);
+        }
+
+        if(LgripValue == 1)
+        {
+            LHand.SetActive(false);
+            LHandOnBar.SetActive(true);
+        }
+        else
+        {
+            LHand.SetActive(true);
+            LHandOnBar.SetActive(false);
+        }
+
         if(Grabbed)
         {
-            if(RgripValue == 1)
-            {
-                RHand.SetActive(false);
-                RHandOnBar.SetActive(true);
-            }
-            else
-            {
-                RHand.SetActive(true);
-                RHandOnBar.SetActive(false);
-            }
-
-            if(LgripValue == 1)
-            {
-                LHand.SetActive(false);
-                LHandOnBar.SetActive(true);
-            }
-            else
-            {
-                LHand.SetActive(true);
-                LHandOnBar.SetActive(false);
-            }
-
             LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
             RtriggerValue = RightHandTrigger.action.ReadValue<float>();
 

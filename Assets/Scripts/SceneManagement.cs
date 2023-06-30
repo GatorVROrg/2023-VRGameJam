@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using TMPro;
+
 public class SceneManagement : MonoBehaviour
 {
     public AudioSource start;
     public AudioClip[] voiceClips;
+
+    public TextMeshPro text;
+    private bool clicked;
     public void OpenCredits()
     {
         SceneManager.LoadScene("Credits Scene");
@@ -17,8 +22,17 @@ public class SceneManagement : MonoBehaviour
     }
     public void StartGame()
     {
-        start.Play();
-        StartCoroutine(wait());
+        if(clicked == false)
+        {
+            clicked = true;
+            text.text = "Skip!";
+            start.Play();
+            StartCoroutine(wait());
+        }
+        else
+        {
+            SceneManager.LoadScene("Level Generation Testing Scene");
+        }
     }
     public void Quit()
     {
