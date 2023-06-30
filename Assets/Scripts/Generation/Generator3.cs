@@ -408,34 +408,38 @@ public class Generator3 : MonoBehaviour
 
     private void SpawnCar(Node road)
     {
-        int lane = Random.Range(0, 3);  // get a random lane 0 = left, 1 = middle, 2 = right
         GameObject carPrefab = carPrefabs[Random.Range(0, carPrefabs.Count)];
 
         Vector3 spawnPosition = road.road.transform.position;
         Quaternion spawnRotation = road.road.transform.rotation;
 
-        float laneOffset = 0f;
+        int lane = Random.Range(0, 3); // get a random lane 0 = left, 1 = middle, 2 = right
 
-        if (lane == 0)  // left lane
+        if (lane == 0) // left lane
         {
-            laneOffset = -0.25f;
+            spawnPosition -= road.road.transform.right * 0.25f;
         }
-        else if (lane == 2)  // right lane
+        else if (lane == 2) // right lane
         {
-            laneOffset = 0.25f;
+            spawnPosition += road.road.transform.right * 0.25f;
         }
 
-        spawnPosition += road.road.transform.right * laneOffset;
-
-        // Instantiate the car at the spawn position and rotation
         GameObject car = Instantiate(carPrefab, spawnPosition, spawnRotation);
         CarMovement carMovement = car.GetComponent<CarMovement>();
 
         List<Vector3> waypointList = new List<Vector3>();
 
-        // Add waypoints with offset depending on the lane
+        float laneOffset = 0f;
+
+        if (lane == 0) // left lane
+            laneOffset = -0.25f;
+        else if (lane == 2) // right lane
+            laneOffset = 0.25f;
+
         int roadIndex = roads.IndexOf(road);
-        if (lane == 1 || lane == 2) // For cars in the left lane
+
+        // Ensure the car is moving in the correct direction based on the lane
+        if (lane == 2 || lane == 1) // Left and Middle lanes should move from roadIndex to roads.Count (forward)
         {
             for (int i = roadIndex; i < roads.Count; i++)
             {
@@ -443,18 +447,18 @@ public class Generator3 : MonoBehaviour
                 waypointList.Add(waypointPosition);
             }
         }
-        else if (lane == 0) // For cars in the middle and right lanes
+        else if (lane == 0) // Right lane should move from roadIndex to 0 (reverse)
         {
             for (int i = roadIndex; i >= 0; i--)
             {
-                Vector3 waypointPosition = roads[i].road.transform.position - (roads[i].road.transform.right * laneOffset);
+                Vector3 waypointPosition = roads[i].road.transform.position + (roads[i].road.transform.right * laneOffset);
                 waypointList.Add(waypointPosition);
             }
         }
 
         carMovement.waypoints = waypointList;
-
     }
+
 
 
 
