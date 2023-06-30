@@ -5,7 +5,7 @@ public class GhostMovement : MonoBehaviour
 {
     public Generator3 generator; // Assign waypoints in Unity inspector
     public float speed = 1.0f;
-    private int waypointIndex = 0;
+    public int waypointIndex = 0;
     private List<Transform> waypoints;
 
     void Start() 

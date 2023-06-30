@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject ghostPrefab;
 
-    private GameObject ghost;
+    public GameObject ghost;
     private int newGame;
     public bool isActiveInstance; //whether a game is currently being played. 
 
@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour
         ghost = Instantiate(ghostPrefab, generator.roads[0].road.transform.position, Quaternion.identity);
         ghost.GetComponent<GhostMovement>().speed = LevelSpeeds[currentLevel % LevelSpeeds.Count] * Mathf.Log(newGame + 2);
         ghost.GetComponent<GhostMovement>().generator = generator;
-
 
         currentScore = 0;
     }

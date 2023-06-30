@@ -605,6 +605,8 @@ MonoBehaviour:
   - 5
   ghostPrefab: {fileID: 8576435677101223540, guid: e863c66dc1901c249945f10409480d09,
     type: 3}
+  ghost: {fileID: 0}
+  isActiveInstance: 0
 --- !u!4 &899428333
 Transform:
   m_ObjectHideFlags: 0
@@ -812,6 +814,9 @@ MonoBehaviour:
     type: 3}
   mapNodes: []
   targetPrefab: {fileID: 2682899880384356897, guid: fc2d6f9e566f9194fb74d0c3e0df8c4a,
+    type: 3}
+  ghost: {fileID: 0}
+  ghostDisplayPrefab: {fileID: 6036242423137934288, guid: 83b79c9325d7697438effe281b30dcf7,
     type: 3}
 --- !u!1 &1654128379
 GameObject:

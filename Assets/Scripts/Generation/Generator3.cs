@@ -34,6 +34,10 @@ public class Generator3 : MonoBehaviour
     private GameObject playerDisplay;
     public GameObject targetPrefab;
     private GameObject target;
+    public GhostMovement ghost;
+    public GameObject ghostDisplayPrefab;
+    private GameObject ghostDisplay;
+    private int previousGhostIndex;
 
     public void Generate()
     {
@@ -89,6 +93,7 @@ public class Generator3 : MonoBehaviour
         if (active)
         {
             UpdateRoads();
+            UpdateGhostDisplay();
         }
     }
 
@@ -263,6 +268,7 @@ public class Generator3 : MonoBehaviour
 
     #endregion
 
+    #region Buildings
     private void SpawnBuildings(Node road) 
     {
         if (road.leftBuilding == null) 
@@ -349,6 +355,8 @@ public class Generator3 : MonoBehaviour
         road.cornerBuilding.SetActive(false);
     }
 
+    #endregion
+
     private void InitialRender()
     {
         for (int i = 0; i < roads.Count - 1; i++)
@@ -369,6 +377,28 @@ public class Generator3 : MonoBehaviour
         playerDisplay.transform.position = new Vector3(roads[currentNodeIndex].position.x + 5000, spawnHeight, roads[currentNodeIndex].position.y);
         playerDisplay.transform.rotation = roads[currentNodeIndex].road.transform.rotation;
     }
+
+    private void UpdateGhostDisplay()
+    {
+        if (ghost == null)
+        {
+            ghost = GameManager.instance.ghost.GetComponent<GhostMovement>();
+            if (ghost != null)
+            {
+                ghostDisplay = Instantiate(ghostDisplayPrefab, new Vector3(roads[ghost.waypointIndex].road.transform.position.x + 5000, spawnHeight, roads[ghost.waypointIndex].road.transform.position.z), roads[ghost.waypointIndex].road.transform.rotation);
+                previousGhostIndex = ghost.waypointIndex;
+            }
+        }
+        else if (ghost.waypointIndex != previousGhostIndex)
+        {
+            ghostDisplay.transform.position = new Vector3(roads[ghost.waypointIndex].road.transform.position.x + 5000, spawnHeight, roads[ghost.waypointIndex].road.transform.position.z);
+            ghostDisplay.transform.rotation = roads[ghost.waypointIndex].road.transform.rotation;
+            previousGhostIndex = ghost.waypointIndex;
+        }
+    }
+
+
+
 
     private void UpdateCamera() 
     {
