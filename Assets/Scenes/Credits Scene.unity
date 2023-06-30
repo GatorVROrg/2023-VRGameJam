@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Game Designers:
+  m_text: 'Game Design:
 
     Miles Haase
 
@@ -1796,7 +1796,7 @@ MonoBehaviour:
     Landon White
 
 
-    Scripting:
+    Code:
 
     Miles
     Haase
@@ -1822,6 +1822,11 @@ MonoBehaviour:
     Music:
 
     Keith Khadar
+
+    Miles
+    Haase
+
+    Landon White
 
 '
   m_isRightToLeft: 0
@@ -1850,7 +1855,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 112.6
+  m_fontSize: 101.9
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
