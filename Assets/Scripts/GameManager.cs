@@ -34,11 +34,15 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
-            currentLevel = 0;
-            currentScore = 0;
-            totalScore = 0;
-            newGame = 1;
-            isActiveInstance = true;
+
+            if (SceneManager.GetActiveScene().name == "Level Generation Testing Scene")
+            {
+                currentLevel = 0;
+                currentScore = 0;
+                totalScore = 0;
+                newGame = 1;
+                isActiveInstance = true;
+            }
         }
         else if (instance != this)
         {
@@ -116,26 +120,29 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!isGameOver)
+        if (isActiveInstance)
         {
-            currentScore = generator.currentNodeIndex - generator.lookAhead;
-            UpdateText();
-
-            // Calculate the distance between the player and the ghost
-            float distance = Vector3.Distance(generator.player.position, ghost.transform.position);
-
-            // If the distance is less than 0.1, call Die method
-            if(distance < 0.5f)
+            if (!isGameOver)
             {
-                Die("Ghost caught the player");
-                Debug.Log("Ghost caught the player");
-            }
+                currentScore = generator.currentNodeIndex - generator.lookAhead;
+                UpdateText();
 
-        }
-        if (currentScore == generator.levelDistance && !isGameOver)
-        {
-            isGameOver = true;
-            EndLevel();
+                // Calculate the distance between the player and the ghost
+                float distance = Vector3.Distance(generator.player.position, ghost.transform.position);
+
+                // If the distance is less than 0.1, call Die method
+                if(distance < 0.5f)
+                {
+                    Die("Ghost caught the player");
+                    Debug.Log("Ghost caught the player");
+                }
+
+            }
+            if (currentScore == generator.levelDistance && !isGameOver)
+            {
+                isGameOver = true;
+                EndLevel();
+            }
         }
     }
 
