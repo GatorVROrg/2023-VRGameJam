@@ -32,6 +32,9 @@ public class Moped : MonoBehaviour
     public AudioSource voiceSource;
     public AudioSource engineSource;
 
+    public AudioClip[] ambianceClips;
+    public AudioSource ambianceSource;
+
     private Quaternion defaultRot;
     private float RtriggerValue;
     private float LtriggerValue;
@@ -46,6 +49,9 @@ public class Moped : MonoBehaviour
 
     private float VoicesIndex = 0;
     private bool playVoices = true;
+
+    private float AmbianceIndex = 0;
+    private bool playAmbiance = true;
 
     void Start()
     {
@@ -66,6 +72,18 @@ public class Moped : MonoBehaviour
                 voiceSource.Play();
                 VoicesIndex = randomIndex;
                 StartCoroutine(PauseVoices());
+            }
+        }
+
+        if (playAmbiance)
+        {
+            int randomIndex = Random.Range(0, ambianceClips.Length);
+            if(randomIndex != AmbianceIndex)
+            {
+                ambianceSource.clip = ambianceClips[randomIndex];
+                ambianceSource.Play();
+                AmbianceIndex = randomIndex;
+                StartCoroutine(PauseAmbiance());
             }
         }
 
@@ -117,11 +135,7 @@ public class Moped : MonoBehaviour
 
             if(Accelerating)
             {
-                engineSource.mute = false;
-            }
-            else
-            {
-                engineSource.mute = true;
+                engineSource.Play();
             }
 
             if(Accelerating && !Deccelerating)
@@ -170,5 +184,12 @@ public class Moped : MonoBehaviour
         playVoices = false;
         yield return new WaitForSeconds(60);
         playVoices = true;
+    }
+
+    public IEnumerator PauseAmbiance()
+    {
+        playAmbiance = false;
+        yield return new WaitForSeconds(30);
+        playAmbiance = true;
     }
 }
