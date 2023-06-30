@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1452265815744701589}
   - component: {fileID: 3663258932167628984}
   - component: {fileID: 6425552123708065408}
+  - component: {fileID: 3661172035847601175}
   m_Layer: 0
   m_Name: TruckYellow 2
   m_TagString: Untagged
@@ -158,7 +159,7 @@ Transform:
   - {fileID: 5419970597719480388}
   - {fileID: 1127745926502515384}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1452265815744701589
 MonoBehaviour:
@@ -285,8 +286,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.6
+  rotationSpeed: 10
   waypointIndex: 0
   waypoints: []
+--- !u!65 &3661172035847601175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080394138094855693}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 60.000004, y: 55.000008, z: 166.83203}
+  m_Center: {x: 0, y: 27, z: -2.5841272}
 --- !u!1 &1445888544060855228
 GameObject:
   m_ObjectHideFlags: 0

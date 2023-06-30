@@ -110,6 +110,7 @@ public class Moped : MonoBehaviour
                 LHand.SetActive(false);
                 LHandOnBar.SetActive(true);
             }
+            
             LtriggerValue = LeftHandTrigger.action.ReadValue<float>();
             RtriggerValue = RightHandTrigger.action.ReadValue<float>();
 
