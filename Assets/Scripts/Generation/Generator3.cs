@@ -202,7 +202,10 @@ public class Generator3 : MonoBehaviour
             {
 
                 // Deactivate the road at the back of the range
-                DespawnRoad(roads[currentNodeIndex - lookAhead]);
+                if (currentNodeIndex - lookAhead >= 0)
+                {
+                    DespawnRoad(roads[currentNodeIndex - lookAhead]);
+                }
 
                 // Activate the road at the front of the range, if it exists
                 if (currentNodeIndex + lookAhead < roads.Count)
@@ -221,15 +224,17 @@ public class Generator3 : MonoBehaviour
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
-
-                // Deactivate the road at the front of the range
-                if (currentNodeIndex + lookAhead - 1 < roads.Count)
+                if (currentNodeIndex - lookAhead >= 0)
                 {
-                    DespawnRoad(roads[currentNodeIndex + lookAhead - 1]);
-                }
+                    // Deactivate the road at the front of the range
+                    if (currentNodeIndex + lookAhead - 1 < roads.Count)
+                    {
+                        DespawnRoad(roads[currentNodeIndex + lookAhead - 1]);
+                    }
 
-                // Activate the road at the back of the range
-                SpawnRoad(roads[currentNodeIndex - lookAhead]);
+                    // Activate the road at the back of the range
+                    SpawnRoad(roads[currentNodeIndex - lookAhead]);
+                }
 
                 currentNodeIndex--;
                 UpdatePlayerDisplay();
