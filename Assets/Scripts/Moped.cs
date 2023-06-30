@@ -53,6 +53,8 @@ public class Moped : MonoBehaviour
     private float AmbianceIndex = 0;
     private bool playAmbiance = true;
 
+    private bool wait = false;
+
     void Start()
     {
         defaultRot = HandleBars.localRotation;
@@ -60,6 +62,7 @@ public class Moped : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         LgripValue = LeftHandGrip.action.ReadValue<float>();
         RgripValue = RightHandGrip.action.ReadValue<float>();
 
@@ -74,8 +77,10 @@ public class Moped : MonoBehaviour
                 StartCoroutine(PauseVoices());
             }
         }
-
-        StartCoroutine(PauseAmbiance());
+        if(wait == false)
+        {
+            StartCoroutine(PauseAmbiance());
+        }
         if (playAmbiance)
         {
             int randomIndex = Random.Range(0, ambianceClips.Length);
@@ -168,6 +173,8 @@ public class Moped : MonoBehaviour
                 }
             }
         }
+
+        wait = true;
     }
 
     public void OnGrab()
