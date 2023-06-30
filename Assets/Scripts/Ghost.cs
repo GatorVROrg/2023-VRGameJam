@@ -31,7 +31,6 @@ public class Ghost : MonoBehaviour
         tempPos.y = originalY + Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
         transform.position = tempPos;
 
-        StartCoroutine(Pause());
         if (play)
         {
             int randomIndex = Random.Range(0, audioClips.Length);
