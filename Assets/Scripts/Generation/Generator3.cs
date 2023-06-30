@@ -190,7 +190,7 @@ public class Generator3 : MonoBehaviour
         SpawnBuildings(road);
 
         int random = Random.Range(0, carSpawnDenominator);
-        if (random == 0)
+        if (random == 0 && currentNodeIndex != lookAhead)
         {
             SpawnCar(road);
         }
@@ -414,42 +414,48 @@ public class Generator3 : MonoBehaviour
         Vector3 spawnPosition = road.road.transform.position;
         Quaternion spawnRotation = road.road.transform.rotation;
 
+        float laneOffset = 0f;
+
         if (lane == 0)  // left lane
         {
-            spawnPosition -= road.road.transform.right * 0.25f;
+            laneOffset = -0.25f;
         }
         else if (lane == 2)  // right lane
         {
-            spawnPosition += road.road.transform.right * 0.25f;
+            laneOffset = 0.25f;
         }
 
-        // For the middle lane (lane == 1), we would just use the road's position
+        spawnPosition += road.road.transform.right * laneOffset;
 
+        // Instantiate the car at the spawn position and rotation
         GameObject car = Instantiate(carPrefab, spawnPosition, spawnRotation);
         CarMovement carMovement = car.GetComponent<CarMovement>();
 
-        List<Transform> waypointList = new List<Transform>();
+        List<Vector3> waypointList = new List<Vector3>();
 
-        if (lane == 1 || lane == 2)
+        // Add waypoints with offset depending on the lane
+        int roadIndex = roads.IndexOf(road);
+        if (lane == 1 || lane == 2) // For cars in the left lane
         {
-            // reversed waypoints for cars in the middle and right lanes
-            for (int i = currentNodeIndex; i < roads.Count; i++)
+            for (int i = roadIndex; i < roads.Count; i++)
             {
-                waypointList.Add(roads[i].road.transform);
+                Vector3 waypointPosition = roads[i].road.transform.position + (roads[i].road.transform.right * laneOffset);
+                waypointList.Add(waypointPosition);
             }
-            waypointList.Reverse();
         }
-        else
+        else if (lane == 0) // For cars in the middle and right lanes
         {
-            // normal waypoints for cars in the left lane
-            for (int i = currentNodeIndex; i < roads.Count; i++)
+            for (int i = roadIndex; i >= 0; i--)
             {
-                waypointList.Add(roads[i].road.transform);
+                Vector3 waypointPosition = roads[i].road.transform.position - (roads[i].road.transform.right * laneOffset);
+                waypointList.Add(waypointPosition);
             }
         }
 
         carMovement.waypoints = waypointList;
+
     }
+
 
 
     private void UpdateCamera() 

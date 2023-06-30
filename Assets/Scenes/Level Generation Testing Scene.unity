@@ -924,12 +924,12 @@ MonoBehaviour:
     type: 3}
   carSpawnDenominator: 3
   carPrefabs:
+  - {fileID: 6211735790044191046, guid: b753edee08c7b9d4794d863f510087dd, type: 3}
   - {fileID: 4206601170887834641, guid: ccc3223c343ff0b48bdc85aa8395a9cb, type: 3}
   - {fileID: 4640868480925826053, guid: 8f5f09689858dca4099bba4885c36680, type: 3}
-  - {fileID: 7036266027019049473, guid: f2e98ae3e8dbc784389811a6bbb734a4, type: 3}
-  - {fileID: 6731037713923604474, guid: b819d1ad4684d604fbc29f3361d404a6, type: 3}
-  - {fileID: 1080394138094855693, guid: 90b6b1318372a564a898cf93f76bb2cf, type: 3}
-  - {fileID: 6211735790044191046, guid: b753edee08c7b9d4794d863f510087dd, type: 3}
+  - {fileID: 7036266027019049473, guid: be4be517d40a0c7459a50c195e34ab2e, type: 3}
+  - {fileID: 6731037713923604474, guid: 336f4c89c3e150846932d5be5b742552, type: 3}
+  - {fileID: 1080394138094855693, guid: de1a8d9a89995fb4c88aee77100978de, type: 3}
   cars: []
 --- !u!1 &1654128379
 GameObject:
