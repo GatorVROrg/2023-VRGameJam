@@ -38,6 +38,9 @@ public class Generator3 : MonoBehaviour
     public GameObject ghostDisplayPrefab;
     private GameObject ghostDisplay;
     private int previousGhostIndex;
+    public int carSpawnDenominator;
+    public List<GameObject> carPrefabs;
+    public List<GameObject> cars;
 
     public void Generate()
     {
@@ -185,6 +188,12 @@ public class Generator3 : MonoBehaviour
         road.road.SetActive(true);
         
         SpawnBuildings(road);
+
+        int random = Random.Range(0, carSpawnDenominator);
+        if (random == 0)
+        {
+            SpawnCar(road);
+        }
     }
 
     private void DespawnRoad(Node road)
@@ -397,7 +406,50 @@ public class Generator3 : MonoBehaviour
         }
     }
 
+    private void SpawnCar(Node road)
+    {
+        int lane = Random.Range(0, 3);  // get a random lane 0 = left, 1 = middle, 2 = right
+        GameObject carPrefab = carPrefabs[Random.Range(0, carPrefabs.Count)];
 
+        Vector3 spawnPosition = road.road.transform.position;
+        Quaternion spawnRotation = road.road.transform.rotation;
+
+        if (lane == 0)  // left lane
+        {
+            spawnPosition -= road.road.transform.right * 0.25f;
+        }
+        else if (lane == 2)  // right lane
+        {
+            spawnPosition += road.road.transform.right * 0.25f;
+        }
+
+        // For the middle lane (lane == 1), we would just use the road's position
+
+        GameObject car = Instantiate(carPrefab, spawnPosition, spawnRotation);
+        CarMovement carMovement = car.GetComponent<CarMovement>();
+
+        List<Transform> waypointList = new List<Transform>();
+
+        if (lane == 1 || lane == 2)
+        {
+            // reversed waypoints for cars in the middle and right lanes
+            for (int i = currentNodeIndex; i < roads.Count; i++)
+            {
+                waypointList.Add(roads[i].road.transform);
+            }
+            waypointList.Reverse();
+        }
+        else
+        {
+            // normal waypoints for cars in the left lane
+            for (int i = currentNodeIndex; i < roads.Count; i++)
+            {
+                waypointList.Add(roads[i].road.transform);
+            }
+        }
+
+        carMovement.waypoints = waypointList;
+    }
 
 
     private void UpdateCamera() 
