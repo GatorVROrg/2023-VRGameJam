@@ -212,29 +212,32 @@ public class Generator3 : MonoBehaviour
         if (roads[currentNodeIndex].position != playerRoadPosition)
         {
             // Check if the player has moved forward or backward
-            if (roads[currentNodeIndex + 1].position == playerRoadPosition)
+            if (currentNodeIndex + 1 < roads.Count)
             {
-
-                // Deactivate the road at the back of the range
-                if (currentNodeIndex - lookAhead >= 0)
+                if (roads[currentNodeIndex + 1].position == playerRoadPosition)
                 {
-                    DespawnRoad(roads[currentNodeIndex - lookAhead]);
-                }
 
-                // Activate the road at the front of the range, if it exists
-                if (currentNodeIndex + lookAhead < roads.Count)
-                {
-                    SpawnRoad(roads[currentNodeIndex + lookAhead]);
-
-                    if (currentNodeIndex + lookAhead == roads.Count - 1)
+                    // Deactivate the road at the back of the range
+                    if (currentNodeIndex - lookAhead >= 0)
                     {
-                        target = Instantiate(targetPrefab, new Vector3(roads[currentNodeIndex + lookAhead].position.x, spawnHeight, roads[currentNodeIndex + lookAhead].position.y), Quaternion.identity);
+                        DespawnRoad(roads[currentNodeIndex - lookAhead]);
                     }
-                }
 
-                currentNodeIndex++;
-                UpdatePlayerDisplay();
-                UpdateCamera();
+                    // Activate the road at the front of the range, if it exists
+                    if (currentNodeIndex + lookAhead < roads.Count)
+                    {
+                        SpawnRoad(roads[currentNodeIndex + lookAhead]);
+
+                        if (currentNodeIndex + lookAhead == roads.Count - 1)
+                        {
+                            target = Instantiate(targetPrefab, new Vector3(roads[currentNodeIndex + lookAhead].position.x, spawnHeight, roads[currentNodeIndex + lookAhead].position.y), Quaternion.identity);
+                        }
+                    }
+
+                    currentNodeIndex++;
+                    UpdatePlayerDisplay();
+                    UpdateCamera();
+                }
             }
             else if (roads[currentNodeIndex - 1].position == playerRoadPosition)
             {
