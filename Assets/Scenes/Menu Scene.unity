@@ -1388,6 +1388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1558259860}
   voiceClips: []
+  text: {fileID: 0}
 --- !u!1 &1273556205
 GameObject:
   m_ObjectHideFlags: 0
