@@ -1030,6 +1030,7 @@ GameObject:
   - component: {fileID: 6368325989769734537}
   - component: {fileID: 4388262831975730058}
   - component: {fileID: 4997081746452486692}
+  - component: {fileID: 2447081717087006742}
   m_Layer: 0
   m_Name: TruckRed 2
   m_TagString: Untagged
@@ -1056,7 +1057,7 @@ Transform:
   - {fileID: 2164773797466160989}
   - {fileID: 4318104683091958721}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6368325989769734537
 MonoBehaviour:
@@ -1183,8 +1184,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.6
+  rotationSpeed: 10
   waypointIndex: 0
   waypoints: []
+--- !u!65 &2447081717087006742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731037713923604474}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 60.000004, y: 55.000008, z: 166.83203}
+  m_Center: {x: 0, y: 27, z: -2.5841272}
 --- !u!1 &7038711203218887011
 GameObject:
   m_ObjectHideFlags: 0
