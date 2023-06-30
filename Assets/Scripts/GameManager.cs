@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject ghost;
     private int newGame;
     public bool isActiveInstance; //whether a game is currently being played. 
+    
 
 
     void Awake()
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
     public void Die(string message)
     {
         isActiveInstance = false;
+        totalScore += currentScore;
         SceneManager.LoadScene("DeathScene");
     }
 
