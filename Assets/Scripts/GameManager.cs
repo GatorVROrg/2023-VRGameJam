@@ -66,6 +66,14 @@ public class GameManager : MonoBehaviour
         // Find the Generator3 instance and assign it to the generator3 member
         if (SceneManager.GetActiveScene().name == "Level Generation Testing Scene")
         {
+            if (!isActiveInstance)
+            {
+                isActiveInstance = true;
+                totalScore = 0;
+                currentLevel = 0;
+                currentScore = 0;
+                newGame = 0;
+            }
             Generator3 generator3 = FindObjectOfType<Generator3>();
             scoreText = GameObject.Find("Score Text").GetComponent<TextMeshPro>();
             if (generator3 != null) 
@@ -79,7 +87,8 @@ public class GameManager : MonoBehaviour
             StartLevel();
         }
     }
-
+    
+    
     public void StartLevel()
     {
         isGameOver = false;
