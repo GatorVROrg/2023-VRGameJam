@@ -16,7 +16,7 @@ Material:
   - _SUNDISK_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
+  m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
@@ -31,9 +31,9 @@ Material:
     - _BottomExponent: 5.84
     - _DirectionPitch: 0
     - _DirectionYaw: 0
-    - _Exponent: 0.6
+    - _Exponent: 3
     - _Exposure: 1.19
-    - _Intensity: 1.223
+    - _Intensity: 0
     - _SunDisk: 0
     - _SunSize: 0
     - _SunSizeConvergence: 5
