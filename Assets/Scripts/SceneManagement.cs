@@ -25,6 +25,11 @@ public class SceneManagement : MonoBehaviour
         Application.Quit();
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene("Menu Scene");
+    }
+
     public IEnumerator wait()
     {
         yield return new WaitForSeconds(16);
