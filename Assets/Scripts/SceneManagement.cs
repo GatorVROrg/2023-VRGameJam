@@ -10,7 +10,7 @@ public class SceneManagement : MonoBehaviour
     public AudioSource start;
     public AudioClip[] voiceClips;
 
-    public TextMeshPro text;
+    public TextMeshProUGUI text;
     private bool clicked;
     public void OpenCredits()
     {
