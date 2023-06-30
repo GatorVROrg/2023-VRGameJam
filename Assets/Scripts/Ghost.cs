@@ -15,6 +15,8 @@ public class Ghost : MonoBehaviour
     private float index = 0;
     private bool play = true;
 
+    private bool wait = false;
+
     void Start()
     {
         // Store the starting y position of the object
@@ -31,6 +33,10 @@ public class Ghost : MonoBehaviour
         tempPos.y = originalY + Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
         transform.position = tempPos;
 
+        if(wait == false)
+        {
+            StartCoroutine(Pause());
+        }
         if (play)
         {
             int randomIndex = Random.Range(0, audioClips.Length);
@@ -42,6 +48,7 @@ public class Ghost : MonoBehaviour
                 StartCoroutine(Pause());
             }
         }
+        wait = true;
     }
 
     public IEnumerator Pause()
