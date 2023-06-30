@@ -3,29 +3,17 @@ using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
-    public Generator3 generator; // Assign waypoints in Unity inspector
     public float speed = 1.0f;
     public int waypointIndex = 0;
     public List<Transform> waypoints;
 
     void Start() 
     {
-        waypoints = new List<Transform>();
     }
 
     void Update()
     {
-        if (waypoints.Count == 0)
-        {
-            if (generator != null)
-            {
-                for (int i = 0; i  < generator.roads.Count; i++)
-                {
-                    waypoints.Add(generator.roads[i].road.transform);
-                }
-            }
-        }
-        else {
+        if (waypoints.Count != 0) {
             // If the ghost has reached the current waypoint...
             if (Vector3.Distance(transform.position, waypoints[waypointIndex].position) < 0.1f)
             {
