@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
 
     public Generator3 generator;
     private int currentScore;
-    private int totalScore;
-    private int currentLevel;
+    public int totalScore;
+    public int currentLevel;
     private bool isGameOver = false;
 
     public List<int> LevelDistances;
