@@ -5,7 +5,7 @@ public class CarMovement : MonoBehaviour
 {
     public float speed = 1.0f;
     public int waypointIndex = 0;
-    public List<Transform> waypoints;
+    public List<Vector3> waypoints;
 
     void Start() 
     {
@@ -15,7 +15,7 @@ public class CarMovement : MonoBehaviour
     {
         if (waypoints.Count != 0) {
             // If the ghost has reached the current waypoint...
-            if (Vector3.Distance(transform.position, waypoints[waypointIndex].position) < 0.1f)
+            if (Vector3.Distance(transform.position, waypoints[waypointIndex]) < 0.1f)
             {
                 // Move on to the next waypoint
                 waypointIndex++;
@@ -27,14 +27,19 @@ public class CarMovement : MonoBehaviour
             }
 
             // Move towards the current waypoint
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex].position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex], speed * Time.deltaTime);
 
             // Face towards the next waypoint
-            Vector3 direction = waypoints[waypointIndex].position - transform.position;
+            Vector3 direction = waypoints[waypointIndex] - transform.position;
             if (direction != Vector3.zero)
             {
                 Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
+            }
+
+            if (waypointIndex == waypoints.Count - 1)
+            {
+                Destroy(gameObject);
             }
         }
     }
