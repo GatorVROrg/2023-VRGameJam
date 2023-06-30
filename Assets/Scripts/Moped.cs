@@ -75,6 +75,7 @@ public class Moped : MonoBehaviour
             }
         }
 
+        StartCoroutine(PauseAmbiance());
         if (playAmbiance)
         {
             int randomIndex = Random.Range(0, ambianceClips.Length);
