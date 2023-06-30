@@ -320,12 +320,18 @@ MonoBehaviour:
   generator: {fileID: 1632171278}
   totalScore: 0
   currentLevel: 0
-  LevelDistances: 3200000046000000500000005a000000
+  LevelDistances: 280000003200000050000000640000007800000096000000c8000000fa0000002c010000f4010000
   LevelSpeeds:
   - 1
-  - 3
-  - 4
-  - 5
+  - 1.1
+  - 1.3
+  - 1.4
+  - 1.41
+  - 1.45
+  - 1.45
+  - 1.45
+  - 1.5
+  - 1.55
   ghostPrefab: {fileID: 8576435677101223540, guid: e863c66dc1901c249945f10409480d09,
     type: 3}
   ghost: {fileID: 0}
@@ -823,6 +829,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3766489272129629154, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_Value
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766489272129629154, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_MaxAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766489272129629154, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_MinAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285582807065256947, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4285582807065256947, guid: f0355f04358227e4db2e4c4a030671b5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4478334198359983930, guid: f0355f04358227e4db2e4c4a030671b5,
         type: 3}
       propertyPath: m_Name
