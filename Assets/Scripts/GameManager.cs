@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public GameObject ghostPrefab;
 
     private GameObject ghost;
+    private int newGame;
+    public bool isActiveInstance; //whether a game is currently being played. 
 
 
     void Awake()
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
             currentLevel = 0;
             currentScore = 0;
             totalScore = 0;
+            newGame = 1;
+            isActiveInstance = true;
         }
         else if (instance != this)
         {
@@ -74,12 +78,12 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         isGameOver = false;
-        generator.levelDistance = LevelDistances[currentLevel];
+        generator.levelDistance = LevelDistances[currentLevel % LevelDistances.Count];
         generator.Generate(); //add ability to pass paramaters and base them on level
 
         //spawn ghosts
         ghost = Instantiate(ghostPrefab, generator.roads[0].road.transform.position, Quaternion.identity);
-        ghost.GetComponent<GhostMovement>().speed = LevelSpeeds[currentLevel];
+        ghost.GetComponent<GhostMovement>().speed = LevelSpeeds[currentLevel % LevelSpeeds.Count] * Mathf.Log(newGame + 2);
         ghost.GetComponent<GhostMovement>().generator = generator;
 
 
@@ -90,6 +94,10 @@ public class GameManager : MonoBehaviour
     {
         totalScore += currentScore;
         currentLevel++;
+        if (currentLevel % LevelDistances.Count == 0)
+        {
+            newGame++;
+        }
         generator.UnGenerate();
 
         //despawn ghosts
@@ -105,13 +113,25 @@ public class GameManager : MonoBehaviour
         // Any additional game over logic
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         if (!isGameOver)
         {
             currentScore = generator.currentNodeIndex - generator.lookAhead;
             UpdateText();
+
+            // Calculate the distance between the player and the ghost
+            float distance = Vector3.Distance(generator.player.position, ghost.transform.position);
+
+            // If the distance is less than 0.1, call Die method
+            if(distance < 0.5f)
+            {
+                Die("Ghost caught the player");
+                Debug.Log("Ghost caught the player");
+                isActiveInstance = false;
+            }
+
         }
         if (currentScore == generator.levelDistance && !isGameOver)
         {
