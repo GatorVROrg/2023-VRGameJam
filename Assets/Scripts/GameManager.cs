@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] private TextMeshPro scoreText;
+
 
     public Generator3 generator;
     private int currentScore;
@@ -54,6 +58,7 @@ public class GameManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level Generation Testing Scene")
         {
             Generator3 generator3 = FindObjectOfType<Generator3>();
+            scoreText = GameObject.Find("Score Text").GetComponent<TextMeshPro>();
             if (generator3 != null) 
             {
                 generator = generator3;
@@ -106,11 +111,18 @@ public class GameManager : MonoBehaviour
         if (!isGameOver)
         {
             currentScore = generator.currentNodeIndex - generator.lookAhead;
+            UpdateText();
         }
         if (currentScore == generator.levelDistance && !isGameOver)
         {
             isGameOver = true;
             EndLevel();
         }
+    }
+
+    void UpdateText()
+    {
+        int total = totalScore + currentScore;
+        scoreText.text = "Total Score: " + total + "\nLevel: " + currentLevel;
     }
 }

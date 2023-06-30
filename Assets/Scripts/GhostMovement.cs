@@ -49,7 +49,5 @@ public class GhostMovement : MonoBehaviour
                 transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, speed * Time.deltaTime);
             }
         }
-
-        Debug.Log(waypoints.Count);
     }
 }
