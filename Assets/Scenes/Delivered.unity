@@ -1069,6 +1069,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 60b9c9fb469d40445aa113ebbd86c2c2, type: 3}
   - {fileID: 8300000, guid: 9dc3e1a18dff75642acae30811636f76, type: 3}
   - {fileID: 8300000, guid: fc96eabc5a14cc544be504837316d36e, type: 3}
+  text: {fileID: 0}
 --- !u!4 &790328295
 Transform:
   m_ObjectHideFlags: 0
@@ -3849,6 +3850,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2024091072}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2056304381
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1993726671844333973, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_Name
+      value: FollowCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412350818587191993, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192913979415170746, guid: 7453ec90d52d4a8429bb9f1445aad4c5,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 7872064110887036913}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7453ec90d52d4a8429bb9f1445aad4c5, type: 3}
 --- !u!1001 &2090750444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4034,50 +4113,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1613426236}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &31133759706858841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7872064110887036912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
 --- !u!33 &38064444402742382
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10069,9 +10104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7872064110887036913}
   - component: {fileID: 7872064110887036812}
-  - component: {fileID: 7872064110887036915}
   - component: {fileID: 7872064110887036914}
-  - component: {fileID: 31133759706858841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -10112,24 +10145,16 @@ MonoBehaviour:
   m_PositionInput:
     m_UseReference: 1
     m_Action:
-      m_Name: Position Input
+      m_Name: Position
       m_Type: 0
-      m_ExpectedControlType: Vector3
-      m_Id: e790d03d-e83e-43ba-8c41-87ec62bd868d
+      m_ExpectedControlType: 
+      m_Id: 0bacfa51-7938-4a88-adae-9e8ba6c59d23
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: a0f59a61-2cfd-4a11-9e81-4eb6e6dab239
+        m_Id: f5efb008-b167-4d0f-b9e0-49a2350a85b3
         m_Path: <XRHMD>/centerEyePosition
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Position
-        m_Flags: 0
-      - m_Name: 
-        m_Id: 4457bc51-0d32-4810-b202-ae4dd7c5bfc2
-        m_Path: <HandheldARInputDevice>/devicePosition
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -10141,24 +10166,16 @@ MonoBehaviour:
   m_RotationInput:
     m_UseReference: 1
     m_Action:
-      m_Name: Rotation Input
+      m_Name: Rotation
       m_Type: 0
-      m_ExpectedControlType: Quaternion
-      m_Id: 5ab7b718-88bc-4f9e-8093-2b9ce2a45b2e
+      m_ExpectedControlType: 
+      m_Id: 5439f14e-c9da-4bd1-ad3f-7121a75c10d9
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings:
       - m_Name: 
-        m_Id: ca82a5cf-f549-4a4a-a243-9afe20bd7163
+        m_Id: f984a7fd-f7e2-45ef-b21d-699a5d160f29
         m_Path: <XRHMD>/centerEyeRotation
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Rotation
-        m_Flags: 0
-      - m_Name: 
-        m_Id: c94388d8-d4a2-41ea-b0eb-cec7cee1d9e8
-        m_Path: <HandheldARInputDevice>/deviceRotation
         m_Interactions: 
         m_Processors: 
         m_Groups: 
@@ -10168,45 +10185,52 @@ MonoBehaviour:
     m_Reference: {fileID: -530380113134220495, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_TrackingStateInput:
-    m_UseReference: 1
+    m_UseReference: 0
     m_Action:
       m_Name: Tracking State Input
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: e249446c-ee12-4bf4-bb61-fec7f369432a
+      m_Id: 427d5cb5-bdea-4c8c-bad5-9fb5bcabebaa
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 1031966339891076899, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+    m_Reference: {fileID: 0}
   m_PositionAction:
-    m_Name: 
+    m_Name: Position
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 0bacfa51-7938-4a88-adae-9e8ba6c59d23
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f5efb008-b167-4d0f-b9e0-49a2350a85b3
+      m_Path: <XRHMD>/centerEyePosition
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Position
+      m_Flags: 0
     m_Flags: 0
   m_RotationAction:
-    m_Name: 
+    m_Name: Rotation
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 5439f14e-c9da-4bd1-ad3f-7121a75c10d9
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: f984a7fd-f7e2-45ef-b21d-699a5d160f29
+      m_Path: <XRHMD>/centerEyeRotation
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Rotation
+      m_Flags: 0
     m_Flags: 0
   m_HasMigratedActions: 1
---- !u!81 &7872064110887036915
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7872064110887036912}
-  m_Enabled: 1
 --- !u!4 &7872064110947976816
 Transform:
   m_ObjectHideFlags: 0
